@@ -1,4 +1,4 @@
-Halo teman-teman semuanya, pada kesemp[atan kali ini kita semua akan belajar bagaimana cara menginstall package Laravel Yajra/laravel-datatables-oracle di project kita.
+Halo teman-teman semuanya, pada kesempatan kali ini kita semua akan belajar bagaimana cara menginstall package Laravel Yajra/laravel-datatables-oracle di project kita.
 
 Pada tutorial kali ini kita semua akan belajar menginstall & konfigurasi tentang Laravel Yajra/laravel-datatables-oracle. Langsung saja kita mulai.
 
@@ -80,11 +80,7 @@ if (request()->ajax()) {
 
 Kemudian kita urutkan data yang ditampilkan berdasarkan yang paling terbaru menggunakan method latest()
 
-<<<<<<< HEAD
 Dan kita akan return ke dalam view yang berada folder di dalam resources/views
-=======
-Dan kita akan return ke dalam view  yang berada di dalam home
->>>>>>> a441f7f (testing)
 
 <h3>Langkah 3 -Menambahkan Route Home</h3>
 
