@@ -4,6 +4,14 @@
 
 Halo teman-teman semuanya, pada kesempatan kali ini kita semua akan belajar bagaimana cara Mengatasi Error  Menggunakan SMTP Gmail di Laravel ,
 
+Sebelum temen-temen mengikuti tutorial ini, bisa ikutin dulu Tutorial Kirim Email di Laravel menggunakan Gmail
+
+ https://santrikoding.com/tutorial-kirim-email-di-laravel-menggunakan-gmail  ya, 
+
+
+
+Oke tanpa lama-lama kita lanjut aja ya :smile:
+
 Error yang paling sering terjadi disebabkan oleh ketidak telitian pada tahap konfigurasi file **.env**, terutama jika Anda menggunakan SMTP gmail.
 
 
