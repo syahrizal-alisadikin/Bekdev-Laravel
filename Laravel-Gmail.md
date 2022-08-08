@@ -49,9 +49,7 @@ MAIL_FROM_ADDRESS="hello@example.com"
 MAIL_FROM_NAME="${APP_NAME}"
 ```
 
-Kemudian, silahkan ubah menjadi seperti berikut ini.
-
-
+​	
 
 ```
 MAIL_DRIVER=smtp

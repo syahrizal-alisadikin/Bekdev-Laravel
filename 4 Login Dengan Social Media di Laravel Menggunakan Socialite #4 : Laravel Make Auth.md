@@ -1,0 +1,1 @@
+Halo teman-teman semuanya, pada kesempatan kali ini kita semua akan belajar bagaimana cara membuat Auth di Laravel.
