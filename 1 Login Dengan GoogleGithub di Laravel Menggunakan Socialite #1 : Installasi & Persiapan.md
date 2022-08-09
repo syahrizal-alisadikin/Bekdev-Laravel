@@ -1,4 +1,6 @@
-Halo teman-teman semuanya, pada kesempatan kali ini kita semua akan belajar bagaimana cara membuat proses OAuth Login mengggunakan Sociate di Laravel. 
+Halo teman-teman semuanya, gimana kabarnya ? masih semangat belajarnya kan hehe
+
+pada kesempatan kali ini kita semua akan belajar bagaimana cara membuat proses OAuth Login mengggunakan Sociate di Laravel. 
 
 
 
