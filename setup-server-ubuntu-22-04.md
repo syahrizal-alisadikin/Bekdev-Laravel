@@ -4,21 +4,21 @@ Halo teman-teman semuanya, pada kesempatan kali ini kita semua akan belajar baga
 
 https://www.digitalocean.com/community/tutorials/initial-server-setup-with-ubuntu
 
-    ```
-    ufw app list
-    ```
+```
+ufw app list
+```
     
-    ```
-    ufw allow OpenSSH
-    ```
+```
+ufw allow OpenSSH
+```
     
-    ```
-    ufw enable
-    ```
-    
-    ```
-    ufw status
-    ```
+```
+ufw enable
+```
+
+```
+ufw status
+```
 
 <h3>Install LEMP</h3>
 
@@ -26,33 +26,33 @@ https://www.digitalocean.com/community/tutorials/initial-server-setup-with-ubunt
    
 https://www.digitalocean.com/community/tutorials/how-to-install-nginx-on-ubuntu-22-04
    
-    ```
-    sudo apt update
-    ```
-     
-    ``` 
-    sudo apt install nginx
-    ```
-     
-    ``` 
-    sudo ufw allow 'Nginx HTTP'
-    ```
-     
-    ``` 
-    sudo ufw status
-    ```
-     
-    ``` 
-    systemctl status nginx
-    ```
-     
-    ``` 
-    curl -4 icanhazip.com
-    ```
-     
-    ``` 
-    http://your_server_ip
-    ```
+```
+sudo apt update
+```
+ 
+``` 
+sudo apt install nginx
+```
+ 
+``` 
+sudo ufw allow 'Nginx HTTP'
+```
+ 
+``` 
+sudo ufw status
+```
+ 
+``` 
+systemctl status nginx
+```
+ 
+``` 
+curl -4 icanhazip.com
+```
+ 
+``` 
+http://your_server_ip
+```
      
     
      ![](https://i.imgur.com/Rd2PPvS.png)
@@ -61,33 +61,33 @@ https://www.digitalocean.com/community/tutorials/how-to-install-nginx-on-ubuntu-
    
 https://www.digitalocean.com/community/tutorials/how-to-install-mysql-on-ubuntu-22-04
    
-    ``` 
-   sudo apt install mysql-server
-    ```
-  
-  (Optional)
-    ``` 
-  sudo mysql_secure_installation
-    ``` 
-  
-    Ganti ke metode password
-   
-    ```
-    sudo mysql 
-    ```
-    
-    ```
-    SELECT user,authentication_string,plugin,host FROM mysql.user;
-    ```
-  
-    ```
-    ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'password';
-    ```
+``` 
+sudo apt install mysql-server
+```
 
-    Nanti masuknya pake: 
-    ```
-    mysql -u root -p
-    ```
+(Optional)
+``` 
+sudo mysql_secure_installation
+``` 
+
+Ganti ke metode password
+
+```
+sudo mysql 
+```
+
+```
+SELECT user,authentication_string,plugin,host FROM mysql.user;
+```
+
+```
+ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'password';
+```
+
+Nanti masuknya pake: 
+```
+mysql -u root -p
+```
 
 4. Install PHP
 
