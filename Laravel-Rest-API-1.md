@@ -1,5 +1,11 @@
 <p>Halo teman-teman semuanya, pada seri artikel kali ini kita semua akan belajar bagaimana cara membuat <em>Restful</em> <em>API</em> di <strong>Laravel</strong> <strong>11</strong> yang ditunjukkan untuk para pemula. Dimana pada seri ini kita akan mulai materi-nya secara step by step dari dasar sampai testing <em>Rest</em> <em>API</em> yang telah dibuat. Pada pembuatan <em>Rest</em> <em>API</em> ini, kita juga akan belajar melakukan <em>upload</em> gambar di dalam <strong>Laravel</strong>.</p>
 <p>Dan kita juga akan memanfaatkan fitur bawaan dari <strong>Laravel</strong> yang bernama <em>API</em> <em>Resources</em>. Dengan menggunakan <em>API</em> <em>Resources</em>, kita bisa melakukan transformasi data dari <em>Model</em> menjadi format <em>JSON</em> dengan sangat mudah dan cepat.</p>
+<h3>Tools dan hal-hal teknis yang perlu disiapkan</h3>
+<h4>- Web server (Xampp/Laragon)</h4>
+<h4>- PHP 8.2 </h4>
+<h4>- Text Editor (Vscode / Sublime text / Cursor) </h4>
+<h4>- Composer 2.7 </h4>
+<h4>- Postman </h4>
 <h3><a id="content-langkah-1---installasi-composer" href="#content-langkah-1---installasi-composer" class="heading-permalink" aria-hidden="true" title="Permalink"></a> Installasi Composer</h3>
 <p>Hal pertama yang mesti teman-teman lakukan adalah melakukan installasi <strong>Composer</strong> di dalam komputer, untuk melakukan installasi <strong>Composer</strong> teman-teman bisa ikuti langkah-langkah yang telah disediakan oleh situs resminya, yaitu di:</p>
 <ol>
@@ -50,7 +56,7 @@ DB_USERNAME=root
 DB_PASSWORD=
 ```
 
-<p>Di atas, pertama kita ubah driver koneksinya yang semula menggunakan <code>sqlite</code> menjadi <code>mysql</code>. Kemudian untuk <code>DB_DATABASE</code> kita ubah menjadi <code>db_laravel11_api</code>,</p>
+<p>Di atas, pertama kita ubah driver koneksinya yang semula menggunakan <code>sqlite</code> menjadi <code>mysql</code>. Kemudian untuk <code>DB_DATABASE</code> kita ubah menjadi <code>laravel_api</code>,</p>
 <h3> Menjalankan Proses Migrate</h3>
 <p>Silahkan teman-teman jalankan perintah berikut ini di dalam terminal/CMD dan pastikan berada di dalam <em>project</em> <strong>Laravel</strong>-nya.</p>
 
