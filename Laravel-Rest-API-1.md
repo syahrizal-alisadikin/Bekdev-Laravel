@@ -50,9 +50,7 @@ DB_USERNAME=root
 DB_PASSWORD=
 ```
 
-Dari perubahan kode di atas, kita melakukan konfigurasi db_connection, nama dabatase yang akan kita gunakan nanti, yaitu DB_CONNECTION mysql DB_DATABASE kita berikan value laravel_api.
-
-Dan untuk DB_PASSWORD, silahkan disesuaikan dengan konfigurasi dari MySQL masing-masing, jika menggunakan XAMPP / Laragon, maka secara default kita tidak perlu mengisinya atau dibiarkan kosong.
+<p>Di atas, pertama kita ubah driver koneksinya yang semula menggunakan <code>sqlite</code> menjadi <code>mysql</code>. Kemudian untuk <code>DB_DATABASE</code> kita ubah menjadi <code>db_laravel11_api</code>,</p>
 
 <h3><a id="content-langkah-3---menjalankan-project-laravel-11" href="#content-langkah-3---menjalankan-project-laravel-11" class="heading-permalink" aria-hidden="true" title="Permalink"></a>Menjalankan Project Laravel 11</h3>
 <p>Sekarang kita akan belajar bagaimana cara menjalankan <em>project</em> <strong>Laravel</strong> <strong>11</strong> yang baru saja kita buat. Silahkan teman-teman jalankan perintah berikut ini di dalam terminal/CMD.</p>
@@ -71,7 +69,7 @@ php artisan serve
 
 ![](https://i.imgur.com/b34ZUNM.png)
 
-<h3><a id="content-langkah-4---menjalankan-storage-link" href="#content-langkah-4---menjalankan-storage-link" class="heading-permalink" aria-hidden="true" title="Permalink"></a>Langkah 4 - Menjalankan Storage Link</h3>
+<h3><a id="content-langkah-4---menjalankan-storage-link" href="#content-langkah-4---menjalankan-storage-link" class="heading-permalink" aria-hidden="true" title="Permalink"></a>Menjalankan Storage Link</h3>
 <p>Setelah berhasil belajar membuat <em>project</em> <strong>Laravel</strong> dan menjalankannya, maka sekarang kita akan lanjutkan belajar bagaimana cara menjalankan perintah <code>storage:link</code> di dalam <strong>Laravel</strong>.</p>
 <h3><a id="content-apa-itu-storage-link" href="#content-apa-itu-storage-link" class="heading-permalink" aria-hidden="true" title="Permalink"></a>Apa itu Storage Link?</h3>
 <p><strong><em>Storage</em> <em>Link</em></strong> digunakan untuk melakukan <em>symlink</em> atau melakukan <em>link</em> sebuah folder di dalam project Laravel.</p>
