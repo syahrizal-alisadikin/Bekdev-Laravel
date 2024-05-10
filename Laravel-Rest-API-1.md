@@ -82,7 +82,49 @@ php artisan storage:link
 
 <h3>Rancang Struktur Database</h3>
 
-![](https://i.imgur.com/U3KOa4q.png)
+![](https://i.imgur.com/I4Fteiz.png)
 
 <p><em>Referensi</em>  <a href="https://drawdb.vercel.app" target="_blank">https://drawdb.vercel.app</a>.</p>
+<h3>Membuat Model dan Migration</h3>
+<p>Sekarang kita lanjutkan belajar membuat <em>Model</em> dan <em>Migration</em> di dalam <strong>Laravel</strong>. Untuk membuat <em>Model</em> dan <em>Migration</em> di dalam <strong>Laravel</strong> kita bisa menggunakan perintah artisan <code>make:model</code>.</p>
+<p>Silahkan teman-teman jalankan perintah berikut ini di dalam terminal/CMD dan pastikan sudah berada di dalam <em>project</em> <strong>Laravel</strong>-nya.</p>
+
+```
+php artisan make:model Book -m
+```
+
+<p>Jika berhasil, maka kita akan mendapatkan 2 <em>file</em> baru yang berada di dalam <em>folder</em> :</p>
+
+<ol>
+<li>
+<code>app/Models/Book.php</code>
+</li>
+<li>
+<code>database/migrations/2024_05_10_020535_create_books_table.php</code>
+</li>
+</ol>
+
+<blockquote>
+<p><strong>INFORMASI</strong> : untuk nama <em>file</em> <em>migration</em> akan random sesuai tanggal pembuatannya.</p>
+</blockquote>
+
+<h3><a id="content-langkah-3---menambahkan-field--kolom" href="#content-langkah-3---menambahkan-field--kolom" class="heading-permalink" aria-hidden="true" title="Permalink"></a>Menambahkan Field / Kolom ke dalam migrations</h3>
+
+<p>Sekarang kita lanjutkan menambahkan <em>field</em> / kolom di dalam <em>file</em> <em>migration</em>. Silahkan teman-teman buka <em>file</em> <code>database/migrations/024_05_10_020535_create_books_table.php</code>, kemudian pada <code>function up</code> ubah kode-nya menjadi seperti berikut ini.</p>
+
+```
+ public function up(): void
+    {
+        Schema::create('books', function (Blueprint $table) {
+            $table->id();
+            $table->integer('user_id');
+            $table->string('name');
+            $table->integer('harga');
+            $table->integer('stock');
+            $table->string('image');
+            $table->timestamps();
+        });
+    }
+```
+
 <p><em>sumber</em>  <a href="https://santrikoding.com/tutorial-restful-api-laravel-11-1-cara-install-menjalankan-laravel-11" target="_blank">https://santrikoding.com/tutorial-restful-api-laravel-11-1-cara-install-menjalankan-laravel-11</a>.</p>
