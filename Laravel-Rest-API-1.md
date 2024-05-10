@@ -120,31 +120,61 @@ php artisan install:api
 
 namespace App\Models;
 
+// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
-class Book extends Model
+class User extends Authenticatable
 {
-    use HasFactory, HasApiTokens;
+    use HasApiTokens,HasFactory, Notifiable;
 
     /**
-     * fillable
+     * The attributes that are mass assignable.
      *
-     * @var array
+     * @var array<int, string>
      */
     protected $fillable = [
-        'user_id',
         'name',
-        'harga',
-        'stock',
-        'image',
+        'email',
+        'password',
     ];
 
-   
-}
+    /**
+     * The attributes that should be hidden for serialization.
+     *
+     * @var array<int, string>
+     */
+    protected $hidden = [
+        'password',
+        'remember_token',
+    ];
 
+    /**
+     * Get the attributes that should be cast.
+     *
+     * @return array<string, string>
+     */
+    protected function casts(): array
+    {
+        return [
+            'email_verified_at' => 'datetime',
+            'password' => 'hashed',
+        ];
+    }
+}
+```
+<p>Di atas, pertama kita <em>import</em> <code> Trait HasApiTokens </code> di dalam <em>model</em> <code>User </code>.</p>
+
+```
+use Laravel\Sanctum\HasApiTokens;
+```
+
+<p>Setelah itu kita tambahkan <code>HasApiTokens</code> di dalam <em>class</em> <em>User</em>.</p>
+
+```
+use HasApiTokens,HasFactory, Notifiable;
 ```
 <p><em>Referensi</em>  <a href="https://laravel.com/docs/11.x/sanctum#installation" target="_blank">https://laravel.com/docs/11.x/sanctum#installation</a>.</p>
 
