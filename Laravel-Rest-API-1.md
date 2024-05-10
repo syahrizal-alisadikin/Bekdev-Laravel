@@ -109,8 +109,43 @@ php artisan install:api
 
 ![Imgur](https://i.imgur.com/W0gV6ia.png)
 
-[Imgur](https://i.imgur.com/JWaFKpa.png)
+![Imgur](https://i.imgur.com/JWaFKpa.png)
 
+<h3>Update Model User</h3>
+<p>Sekarang, kita lanjutkan untuk melakukan beberapa konfigurasi di dalam <em>model</em> <code>User</code> agar bisa menggunakan <strong>Sanctum</strong> untuk <em>generate</em> <em>token</em>.</p>
+<p>Silahkan buka <em>file</em> <code>app/Models/User.php</code> kemudian ubah kode-nya menjadi seperti berikut ini :</p>
+
+```
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+
+use Illuminate\Database\Eloquent\Model;
+use Laravel\Sanctum\HasApiTokens;
+
+class Book extends Model
+{
+    use HasFactory, HasApiTokens;
+
+    /**
+     * fillable
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'user_id',
+        'name',
+        'harga',
+        'stock',
+        'image',
+    ];
+
+   
+}
+
+```
 <p><em>Referensi</em>  <a href="https://laravel.com/docs/11.x/sanctum#installation" target="_blank">https://laravel.com/docs/11.x/sanctum#installation</a>.</p>
 
 <h3>Membuat Model dan Migration</h3>
