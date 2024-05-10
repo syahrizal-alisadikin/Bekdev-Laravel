@@ -96,6 +96,23 @@ php artisan storage:link
 ![](https://i.imgur.com/I4Fteiz.png)
 
 <p><em>Referensi</em>  <a href="https://drawdb.vercel.app" target="_blank">https://drawdb.vercel.app</a>.</p>
+
+<h3>Membuat API Login dan Register Menggunakan Sanctum</h3>
+<p>Laravel Sanctum menyediakan sistem otentikasi yang ringan untuk aplikasi satu halaman (SPA), aplikasi mobile, dan API berbasis token yang sederhana. Sanctum memungkinkan setiap pengguna aplikasi Anda untuk membuat beberapa token API untuk akun mereka. Token-token ini dapat diberikan kemampuan atau ruang lingkup yang menentukan tindakan apa yang diizinkan token untuk lakukan.</p>
+<h3>Installation Sanctum</h3>
+<p>Silahkan jalankan perintah di bawah ini di terminal/CMD :</p>
+
+```
+php artisan install:api
+```
+<p>Jika muncul pertanyaan seperti berikut ini, maka silahkan ketik <code>yes</code> dan <strong>Enter</strong>.</p>
+
+![Imgur](https://i.imgur.com/W0gV6ia.png)
+
+[Imgur](https://i.imgur.com/JWaFKpa.png)
+
+<p><em>Referensi</em>  <a href="https://laravel.com/docs/11.x/sanctum#installation" target="_blank">https://laravel.com/docs/11.x/sanctum#installation</a>.</p>
+
 <h3>Membuat Model dan Migration</h3>
 <p>Sekarang kita lanjutkan belajar membuat <em>Model</em> dan <em>Migration</em> di dalam <strong>Laravel</strong>. Untuk membuat <em>Model</em> dan <em>Migration</em> di dalam <strong>Laravel</strong> kita bisa menggunakan perintah artisan <code>make:model</code>.</p>
 <p>Silahkan teman-teman jalankan perintah berikut ini di dalam terminal/CMD dan pastikan sudah berada di dalam <em>project</em> <strong>Laravel</strong>-nya.</p>
