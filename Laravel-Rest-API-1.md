@@ -471,9 +471,137 @@ namespace App\Http\Controllers\Api;
 </li>
 </ul>
 
+<h3>Uji Coba Register User</h3>
+<p>Sekarang, kita akan melakukan uji coba <em>RESTful API</em> untuk proses <em>register</em>, silahkan buka <code>postman</code> dan pada bagian <em>URL</em>, silahkan masukkan : <a href="http://127.0.0.1:8000/api/register" target="_blank">http://127.0.0.1:8000/api/register</a> dan jangan lupa untuk <em>method</em>nya menggunakan <code>POST</code>, kemudian klik <code>Send</code>, maka kita akan mendapatkan <em>response</em> kurang lebih seperti berikut ini :</p>
 
+```
+{
+    "name": [
+        "The name field is required."
+    ],
+    "email": [
+        "The email field is required."
+    ],
+    "password": [
+        "The password field is required."
+    ]
+}
+```
 
+![Imgur](https://i.imgur.com/1clJv1d.png)
+
+<p><em>Response</em> tersebut merupakan hasil validasi, karena kita belum memasukkan data apapun di dalam <code>Body</code>, sekarang kita akan coba lagi dengan menggunakan data.</p>
+<p>Silahkan klik pada <em>tab</em> <code>Body</code> dan pilih <code>form-data</code>, kemudian isikan beberapa <code>key</code> dan <code>value</code> seperti berikut ini :</p>
+<div class="table-responsive"><table>
+<thead>
+<tr>
+<th align="left">KEY</th>
+<th align="left">VALUE</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">name</td>
+<td align="left">jaka</td>
+</tr>
+<tr>
+<td align="left">email</td>
+<td align="left">jaka@gmail.com</td>
+</tr>
+<tr>
+<td align="left">password</td>
+<td align="left">password</td>
+</tr>
+<tr>
+<td align="left">password_confirmation</td>
+<td align="left">password</td>
+</tr>
+</tbody>
+</table></div>
+<p>Di atas, kita membuat contoh data <em>customer</em>, sekarang silahkan klik <code>Send</code>. Dan jika berhasil kita akan mendapatkan <em>response</em> kurang lebih seperti berikut ini :</p>
 <h3>Membuat Model dan Migration Book</h3>
+<p>Sekarang kita lanjutkan belajar membuat <em>Model</em> dan <em>Migration</em> di dalam <strong>Laravel</strong>. Untuk membuat <em>Model</em> dan <em>Migration</em> di dalam <strong>Laravel</strong> kita bisa menggunakan perintah artisan <code>make:model</code>.</p>
+<p>Silahkan teman-teman jalankan perintah berikut ini di dalam terminal/CMD dan pastikan sudah berada di dalam <em>project</em> <strong>Laravel</strong>-nya.</p>
+
+```
+{
+    "token_type": "Bearer",
+    "access_token": "2|6rwgQmklxL1Mj8rrQyr7tIcVVVCZVtoH05ILEs7Ueaa4581c",
+    "user": {
+        "name": "jaka",
+        "email": "jaka@gmail.com",
+        "updated_at": "2024-05-10T04:17:00.000000Z",
+        "created_at": "2024-05-10T04:17:00.000000Z",
+        "id": 2
+    },
+    "message": "berhasil register"
+}
+```
+
+![Imgur](https://i.imgur.com/YHPVXTl.png)
+
+<p>Bisa kita lihat, di atas kita berhasil melakukan proses registrasi dan berhasil mendapatkan <em>token</em> dari <strong>Sanctum</strong>, sekarang silahakan cek juga di <code>table users</code>.</p>
+<h3>Uji Coba Login User</h3>
+<p>Setelah kita berhasil melakukan uji coba di proses <em>register</em>, sekarang kita akan lakukan uji coba untuk proses <em>login</em>. Silahkan klik new <em>tab</em> di <code>postman</code> dan masukkan <em>URL</em> berikut ini : <a href="http://127.0.0.1:8000/api/login" target="_blank">http://127.0.0.1:8000/api/login</a> dan jangan lupa menggunakan method <code>POST</code>, kemudian klik <code>Send</code>. Maka kurang lebih hasilnya seperti berikut ini :</p>
+
+```
+{
+    "email": [
+        "The email field is required."
+    ],
+    "password": [
+        "The password field is required."
+    ]
+}
+```
+
+![Imgur](https://i.imgur.com/NKSwnAX.png)
+
+<p>Di atas kita mendapatkan <em>response</em> <em>message</em> dari validasi, karena kita belum memasukkan data apapun di dalam <em>tab</em> <code>Body</code>. Sekarang silahkan klik tab <code>Body</code> dan pilih <code>form-data</code>, kemudian masukkan beberapa <code>key</code> dan <code>value</code> berikut ini :</p>
+<div class="table-responsive"><table>
+<thead>
+<tr>
+<th>KEY</th>
+<th>VALUE</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>email</td>
+<td>jaka@gmail.com</td>
+</tr>
+<tr>
+<td>password</td>
+<td>password</td>
+</tr>
+</tbody>
+</table></div>
+<p>Silahkan isi dengan data tersebut, karena kita tadi menggunakan data tersebut untuk proses registrasi. Kemudian klik <code>Send</code>. Jika berhasil maka kita akan mendpatkan <em>response</em> kurang lebih seperti berikut ini :</p>
+
+```
+{
+    "token_type": "Bearer",
+    "access_token": "3|OA0ilBRoPooEhAZVuannanKMg2A6VvaVn5YWyF1Jc06ae311",
+    "user": {
+        "id": 2,
+        "name": "jaka",
+        "email": "jaka@gmail.com",
+        "email_verified_at": null,
+        "created_at": "2024-05-10T04:17:00.000000Z",
+        "updated_at": "2024-05-10T04:17:00.000000Z"
+    },
+    "message": "berhasil login"
+}
+```
+
+![Imgur](https://i.imgur.com/aoV3838.png)
+
+<p>Di atas kita telah berhasil melakukan proses <em>login</em> dan mendapatkan <em>token</em> <strong>Sanctum</strong>, <em>token</em> tersebut bisa kita gunakan untuk proses mendapatkan data dari <em>database</em>.</p>
+<blockquote>
+<p><strong>CATATAN !</strong> : <em>token</em> akan selalu bersifat <em>random</em> saat melakukan proses <em>login</em>.</p>
+</blockquote>
+
+<h3> Membuat Model dan Migration Book</h3>
 <p>Sekarang kita lanjutkan belajar membuat <em>Model</em> dan <em>Migration</em> di dalam <strong>Laravel</strong>. Untuk membuat <em>Model</em> dan <em>Migration</em> di dalam <strong>Laravel</strong> kita bisa menggunakan perintah artisan <code>make:model</code>.</p>
 <p>Silahkan teman-teman jalankan perintah berikut ini di dalam terminal/CMD dan pastikan sudah berada di dalam <em>project</em> <strong>Laravel</strong>-nya.</p>
 
