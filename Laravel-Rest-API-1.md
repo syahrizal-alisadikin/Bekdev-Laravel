@@ -80,4 +80,9 @@ php artisan serve
 php artisan storage:link
 ```
 
+<h3>Rancang Struktur Database</h3>
+
+![](https://i.imgur.com/U3KOa4q.png)
+
+<p><em>Referensi</em>  <a href="https://drawdb.vercel.app" target="_blank">https://drawdb.vercel.app</a>.</p>
 <p><em>sumber</em>  <a href="https://santrikoding.com/tutorial-restful-api-laravel-11-1-cara-install-menjalankan-laravel-11" target="_blank">https://santrikoding.com/tutorial-restful-api-laravel-11-1-cara-install-menjalankan-laravel-11</a>.</p>
