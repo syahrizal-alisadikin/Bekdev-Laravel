@@ -97,7 +97,7 @@ php artisan storage:link
 
 <p><em>Referensi</em>  <a href="https://drawdb.vercel.app" target="_blank">https://drawdb.vercel.app</a>.</p>
 
-<h3>Membuat API Login dan Register Menggunakan Sanctum</h3>
+<h3>Laravel Sanctum</h3>
 <p>Laravel Sanctum menyediakan sistem otentikasi yang ringan untuk aplikasi satu halaman (SPA), aplikasi mobile, dan API berbasis token yang sederhana. Sanctum memungkinkan setiap pengguna aplikasi Anda untuk membuat beberapa token API untuk akun mereka. Token-token ini dapat diberikan kemampuan atau ruang lingkup yang menentukan tindakan apa yang diizinkan token untuk lakukan.</p>
 <h3>Installation Sanctum</h3>
 <p>Silahkan jalankan perintah di bawah ini di terminal/CMD :</p>
@@ -176,9 +176,200 @@ use Laravel\Sanctum\HasApiTokens;
 ```
 use HasApiTokens,HasFactory, Notifiable;
 ```
+
 <p><em>Referensi</em>  <a href="https://laravel.com/docs/11.x/sanctum#installation" target="_blank">https://laravel.com/docs/11.x/sanctum#installation</a>.</p>
 
-<h3>Membuat Model dan Migration</h3>
+<h3>Membuat RESTful API Authentication dan Register User</h3>
+<p>Sekarang, kita akan belajar bagaimana cara membuat <em>RESTful</em> <em>API</em> untuk proses <em>Authentication</em> menggunakan <strong>Sanctum</strong>. Disini kita akan membuat beberapa fitur, yaitu : <code>register</code>dan <code>login</code>. Dan untuk <em>tools</em> debug yang akan gunakan adalah <code>postman</code>, jadi silahkan teman-teman bisa <em>install</em> <em>tools</em> tersebut melalui <em>link</em> berikut ini : <a href="https://www.postman.com/downloads/" target="_blank">https://www.postman.com/downloads/</a></p>
+
+<h3>Membuat Controller API Authentication</h3>
+<p>Disini kita akan mengelompokan semua <em>controller</em> yang digunakan untuk <em>RESTful</em> <em>API</em> di dalam <em>folder</em> <code>app/Http/Controllers/Api</code>. Silahkan jalankan perintah berikut ini di dalam terminal/CMD :</p>
+
+```
+php artisan make:controller Api/AuthController
+```
+<p>Jika perintah di atas berhasil, maka kita akan mendapatkan 1 <em>file</em> <em>controller</em> baru di dalam <em>folder</em> <code>app/Http/Controllers/Api/AuthController.php</code>. Silahkan buka <em>file</em> tersebut dan ubah kode-nya menjadi seperti berikut ini :</p>
+
+```
+<?php
+
+namespace App\Http\Controllers\Api;
+
+use Exception;
+use App\Models\User;
+use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
+
+class AuthController extends Controller
+{
+    public function register(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'name'     => 'required|string|max:255',
+            'email'    => 'required|email|unique:users',
+            'password' => 'required|confirmed',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json($validator->errors(), 400);
+        }
+
+        $user = User::create([
+            'name'      => $request->name,
+            'email'     => $request->email,
+            'password'  => Hash::make($request->password)
+        ]);
+
+        $token = $user->createToken('authToken')->plainTextToken;
+
+
+
+        if($user) {
+            return response()->json([
+                'token_type' => 'Bearer',
+                'access_token' => $token,
+                'user' => $user,
+                'message' => "berhasil register"
+            ], 201);
+        }
+
+        return response()->json([
+            'success' => false,
+        ], 409);
+    }
+
+    public function login(Request $request)
+    {
+        try {
+            // validasi input
+            $validator = Validator::make($request->all(), [
+                'email' => 'required|email',
+                'password' => 'required',
+            ]);
+
+            if ($validator->fails()) {
+                return response()->json($validator->errors(), 400);
+            }
+
+            // cek Credentials Login
+            $user = User::where('email', $request->email)->first();
+            if (! $user) {
+                return response()->json(['message' => 'Email User Salah'], 400);
+            }
+
+
+            // jika hash tidak sesuai muncul alert
+            if (!Hash::check($request->password, $user->password, [])) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Password salah',
+                ], 401);
+            }
+
+            // jika berhasil
+            $token = $user->createToken('authToken')->plainTextToken;
+
+            return response()->json([
+                'token_type' => 'Bearer',
+                'access_token' => $token,
+                'user' => $user,
+                'message' => "berhasil login"
+            ]);
+        } catch (Exception $error) {
+            return response()->json([
+                'status' => false,
+                'message' => $error->getMessage(),
+            ],  500);
+        }
+    }
+
+    public function logout(Request $request)
+    {
+        $user = $request->user();
+        $user->tokens()->delete();
+        return response()->json([
+            'user' => $user,
+            'message' => "berhasil logout"
+        ]);
+    }
+}
+```
+<p>Di atas kita <em>import</em> <em>model</em> <code>User</code>, karena kita akan menggunakan <em>model</em> ini untuk beberapa aksi, yaitu untuk proses <em>register</em> dan <em>login</em>.</p>
+
+```
+use App\Models\User;
+```
+
+<p>Kemudian, kita <em>import</em> <code>Facades Hash</code>, ini kita gunakan untuk proses <em>hash</em> <em>password</em> saat <em>register</em> <em>user</em>.</p>
+
+```
+use Illuminate\Support\Facades\Hash;
+```
+
+<p>Kemudian, kita <em>import</em> <code>Facades Validator</code>, ini akan kita manfaatkan untuk proses validasi di dalam <em>register</em> dan <em>login</em>.</p>
+
+```
+use Illuminate\Support\Facades\Validator;
+```
+
+<p>Kemudian, kita <em>import</em> <code>Exception</code>, ini akan kita manfaatkan untuk proses jika ada error.</p>
+
+```
+use Exception;
+```
+<p>Di dalam <em>class</em> <code>AuthController</code> kita membuat 3 <em>function</em>, yaitu <code>function register</code> dan <code>function login</code> dan <code>logout</code>.</p>
+
+<p><em><strong>Function Register</strong></em></p>
+<p><code>Function Register</code> digunakan untuk proses registrasi <em>user</em>, disini kita menggunakan validasi untuk memastikan bahwa data yang akan diinputkan benar-benar sesuai.</p>
+
+```
+$validator = Validator::make($request->all(), [
+            'name'     => 'required|string|max:255',
+            'email'    => 'required|email|unique:users',
+            'password' => 'required|confirmed',
+        ]);
+```
+
+<p>Jika validasi di atas tidak terpenuhi, maka kita akan me-<em>return</em> sebuah <em>response</em> validasi <em>error</em> dengan <em>status</em> <em>code</em> <code>400</code>.</p>
+
+```
+ if ($validator->fails()) {
+            return response()->json($validator->errors(), 400);
+        }
+```
+
+<p>Jika validasi di atas terpenuhi, maka akan melakukan proses <em>insert</em> data baru ke dalam <em>database</em>. Kurang lebih seperti berikut ini :</p>
+
+```
+$user = User::create([
+            'name'      => $request->name,
+            'email'     => $request->email,
+            'password'  => Hash::make($request->password)
+        ]);
+```
+
+<p>Setelah data berhasil di masukkan ke dalam <em>database</em>, selanjutnya kita akan melakukan <em>authentication</em> dan <em>generate</em> <em>token</em> menggunakan <strong>Sanctum</strong>, dimana datanya di ambil dari <em>user</em> yang sedang melakukan proses <em>registrasi</em>.</p>
+
+```
+$token = $user->createToken('authToken')->plainTextToken;
+```
+
+<p>Jika berhasil, kita akan membuat <em>response</em> dalam bentuk JSON dengan isi adalah data <em>user</em> itu sendiri dan <em>token</em> yang berhasil di <em>generate</em>. Dan disini kita menggunakan <em>status</em> <em>code</em> <code>201</code>. Artinya kita berhasil membuat <em>resources</em> baru di <em>server</em>.</p>
+
+```
+ if($user) {
+            return response()->json([
+                'token_type' => 'Bearer',
+                'access_token' => $token, //token sanctum
+                'user' => $user, // data user
+                'message' => "berhasil register"
+            ], 201);
+        }
+```
+
+<h3>Membuat Model dan Migration Book</h3>
 <p>Sekarang kita lanjutkan belajar membuat <em>Model</em> dan <em>Migration</em> di dalam <strong>Laravel</strong>. Untuk membuat <em>Model</em> dan <em>Migration</em> di dalam <strong>Laravel</strong> kita bisa menggunakan perintah artisan <code>make:model</code>.</p>
 <p>Silahkan teman-teman jalankan perintah berikut ini di dalam terminal/CMD dan pastikan sudah berada di dalam <em>project</em> <strong>Laravel</strong>-nya.</p>
 
