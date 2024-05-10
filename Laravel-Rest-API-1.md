@@ -127,4 +127,43 @@ php artisan make:model Book -m
     }
 ```
 
+<p>Di atas, kita menambahkan 5 <em>field</em> baru di dalam <em>migration</em>, yaitu <code>user_id</code>, <code>name</code>, <code>harga</code>, <code>stock</code> dan <code>image</code>. Berikut ini detailnya.</p>
+
+<div class="table-responsive"><table>
+<thead>
+<tr>
+<th>FIELD / KOLOM</th>
+<th>TIPE DATA</th>
+<th>KETERANGAN</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>user_id</code></td>
+<td><code>integer</code></td>
+<td>untuk menyimpan id <em>user</em> yang melakukan tambah <em>book</em> </td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td><code>string</code></td>
+<td>untuk menyimpan name <em>book</em>.</td>
+</tr>
+<tr>
+<td><code>harga</code></td>
+<td><code>integer</code></td>
+<td>untuk menyimpan harga <em>book</em>.</td>
+</tr>
+ <tr>
+<td><code>stock</code></td>
+<td><code>integer</code></td>
+<td>untuk menyimpan stock <em>book</em>.</td>
+</tr>
+  <tr>
+<td><code>image</code></td>
+<td><code>string</code></td>
+<td>untuk menyimpan nama <em>file</em> image yang di <em>upload</em> .</td>
+</tr>
+</tbody>
+</table></div>
+
 <p><em>sumber</em>  <a href="https://santrikoding.com/tutorial-restful-api-laravel-11-1-cara-install-menjalankan-laravel-11" target="_blank">https://santrikoding.com/tutorial-restful-api-laravel-11-1-cara-install-menjalankan-laravel-11</a>.</p>
