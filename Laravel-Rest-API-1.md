@@ -211,4 +211,59 @@ class Book extends Model
 
 <p>Dari perubahan kode di atas, kita menambahkan properti baru dengan nama <code>$fillable</code>. properti tersebut disebut dengan <em><strong>Mass</strong></em> <em><strong>Assignment</strong></em> dan di dalamnya kita berikan <em>field</em>-<em>field</em> yang sudah kita buat sebelumnya di dalam <em>file</em> <em>migration</em>.</p>
 
+<h3>Menjalankan Proses Migrate</h3>
+<p>Setelah semua berhasil dibuat, maka langkah berikutnya adalah menjalankan perintah <em>migrate</em>. Dengan menjalankan perintah ini, maka <em>database</em> akan di<em>generate</em> beserta <em>table</em> dan juga <em>field</em>-nya.</p>
+<p>Silahkan teman-teman jalankan perintah berikut ini di dalam terminal/CMD dan pastikan berada di dalam <em>project</em> <strong>Laravel</strong>-nya.</p>
+
+```
+php artisan migrate
+```
+
+![Imgur](https://i.imgur.com/O7zoUEN.png)
+
+<h3>Menambahkan Accessor di Model</h3>
+<p><em>Accessor</em> memungkinkan kita mengubah nilai saat <em>field</em>  diakses. Untuk mendefinisikan <em>Accessor</em>, kita bisa membuat method di dalam <em>Model</em> untuk menentukan <em>field</em> yang akan diakses.</p>
+<blockquote>
+<p><strong>Aturan Penamaan Accessor</strong></p>
+<hr>
+<p>Penamaan <em>method</em> yang dibuat harus sama dengan nama <em>field</em> yang akan di<em>format</em> dan menggunakan <code>CamelCase</code>.</p>
+</blockquote>
+
+<p>Sekarang kita akan membuat <em>Accessor</em> di dalam <em>Model</em> untuk <em>field</em> <code>image</code>, jadi silahkan teman-teman buka <em>file</em> <code>app/Models/Book.php</code>, kemudian ubah kode-nya menjadi seperti berikut ini.</p>
+
+```
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Database\Eloquent\Model;
+
+class Book extends Model
+{
+    use HasFactory;
+
+    /**
+     * fillable
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'user_id',
+        'name',
+        'harga',
+        'stock',
+        'image',
+    ];
+
+    protected function image(): Attribute
+    {
+        return Attribute::make(
+            get: fn ($image) => url('/storage/books/' . $image),
+        );
+    }
+}
+```
+
 <p><em>sumber</em>  <a href="https://santrikoding.com/tutorial-restful-api-laravel-11-1-cara-install-menjalankan-laravel-11" target="_blank">https://santrikoding.com/tutorial-restful-api-laravel-11-1-cara-install-menjalankan-laravel-11</a>.</p>
