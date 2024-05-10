@@ -369,6 +369,109 @@ $token = $user->createToken('authToken')->plainTextToken;
         }
 ```
 
+<p><em><strong>Function Login</strong></em></p>
+<p><code>Function Login</code> akan digunakan untuk proses <em>authentication</em> <em>user</em>. Disini kita juga menggunakan validasi untuk memastikan bahwa <em>field</em> <code>email</code> dan <code>password</code> benar-benar sesuai dengan yang diharapkan.</p>
+
+```
+ $validator = Validator::make($request->all(), [
+                'email' => 'required|email',
+                'password' => 'required',
+            ]);
+```
+
+<p>Jika validasi di atas tidak terpenuhi, maka kita akan membuat <em>response</em> dengan <em>message</em> dari validasi <em>error</em> tersebut dan kita akan menggunakan <em>status</em> <em>code</em> <code>400</code>.</p>
+
+```
+ if ($validator->fails()) {
+                return response()->json($validator->errors(), 400);
+            }
+```
+
+<p>kemudian kita membuat kondisi untuk proses <em>login</em> <em>gagal</em>. Dan kita akan membuat <em>response</em> dengan <em>status</em> <em>code</em> <code>401</code>.</p>
+
+```
+ // cek Credentials Login
+    $user = User::where('email', $request->email)->first();
+    if (! $user) {
+        return response()->json(['message' => 'Email User Salah'], 401);
+    }
+
+
+    // jika hash tidak sesuai muncul alert
+    if (!Hash::check($request->password, $user->password, [])) {
+        return response()->json([
+            'success' => false,
+            'message' => 'Password salah',
+        ], 401);
+    }
+```
+
+<p>Jika proses login berhasil, kita akan membuat <em>response</em> <code>success</code> menjadi <code>true</code> dan menampilkan data <em>user</em> beserta token yang di <em>generate</em>. Disini kita menggunakan <em>status</em> <em>code</em> <code>201</code>.</p>
+
+```
+ // jika berhasil
+    $token = $user->createToken('authToken')->plainTextToken;
+
+    return response()->json([
+        'token_type' => 'Bearer',
+        'access_token' => $token, //token sanctum
+        'user' => $user, //data user
+        'message' => "berhasil login"
+    ],201);
+```
+
+<p><em><strong>Function Logout</strong></em></p>
+<p><code>Function logout</code> digunakan untuk menghapus  <em>token</em>/<em>user</em> yang sedang <em>login</em>.</p>
+
+```
+public function logout(Request $request)
+    {
+        $user = $request->user();
+        $user->tokens()->delete();
+        return response()->json([
+            'user' => $user,
+            'message' => "berhasil logout"
+        ]);
+    }
+```
+
+<h3>Membuat Route API Authentication</h3>
+<p> silahkan buka <em>file</em> <code>routes/api.php</code> dan ubah semua kode-nya menjadi seperti berikut ini :</p>
+
+```
+<?php
+
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\AuthController;
+
+Route::get('/user', function (Request $request) {
+    return $request->user();
+})->middleware('auth:sanctum');
+
+Route::post('login', [AuthController::class, 'login']);
+Route::post('register', [AuthController::class, 'register']);
+```
+
+<p>Di atas, pertama kita set <code>namespace</code> untuk <em>folder</em> <em>controller</em> yang digunakan, yaitu <code>App\Http\Controllers\Api</code>. karena semua <em>controller</em> <em>API</em> kita nanti akan diletakkan di dalam <em>folder</em> tersebut.</p>
+
+```
+namespace App\Http\Controllers\Api;
+```
+<p>Kemudian, kita membuat 3 <em>route</em> dengan <em>method</em> <code>post</code>, yaitu : <code>/login</code>, <code>/register</code> dan <em>method</em> <code>get</code>, yaitu  <code>/user</code>. Untuk route <code>/user</code> kita letakkan di dalam middleware <code>auth:sanctum</code>, artinya route tersebut hanya bisa diakses jika user sudah melakukan proses login / otentikasi.</p>
+
+<p>Secara <em>default</em> jika kita membuat <em>route</em> di dalam <em>file</em> <code>routes/api.php</code> maka <em>prefix</em> yang di gunakan adalah <code>api</code>. Jadi jika di atas kita membuat <em>route</em> <code>/login</code> dan <code>/register</code>, maka hasilnya akan menjadi seperti ini :</p>
+<ul>
+<li>
+<a href="http://127.0.0.1:8000/api/login">http://127.0.0.1:8000/api/login</a>
+</li>
+<li>
+<a href="http://127.0.0.1:8000/api/register">http://127.0.0.1:8000/api/register</a>
+</li>
+</ul>
+
+
+
 <h3>Membuat Model dan Migration Book</h3>
 <p>Sekarang kita lanjutkan belajar membuat <em>Model</em> dan <em>Migration</em> di dalam <strong>Laravel</strong>. Untuk membuat <em>Model</em> dan <em>Migration</em> di dalam <strong>Laravel</strong> kita bisa menggunakan perintah artisan <code>make:model</code>.</p>
 <p>Silahkan teman-teman jalankan perintah berikut ini di dalam terminal/CMD dan pastikan sudah berada di dalam <em>project</em> <strong>Laravel</strong>-nya.</p>
