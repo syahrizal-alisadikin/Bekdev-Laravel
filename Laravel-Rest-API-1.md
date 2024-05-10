@@ -17,6 +17,9 @@ composer
 ```
 
 <p>Jika berhasil, maka akan keluar hasil seperti berikut ini.</p>
+
+![](https://i.imgur.com/cRBIxP2.png)
+
 <h3><a id="content-langkah-2---membuat-project-laravel-11" href="#content-langkah-2---membuat-project-laravel-11" class="heading-permalink" aria-hidden="true" title="Permalink"></a> Membuat Project Laravel 11</h3>
 <p>Sekarang silahkan teman-teman masuk ke dalam <em>folder</em> dimana akan menyimpan <em>project</em>-nya, kemudian jalankan perintah berikut ini di dalam terminal/CMD.</p>
 
@@ -65,6 +68,9 @@ php artisan serve
 ```
 <p>Perintah di atas digunakan untuk menjalankan <em>server</em> <strong>Laravel</strong>, jika berhasil maka <em>project</em> kita akan dijalankan di dalam <em>localhost</em> dengan <em>port</em> <code>8000</code>.</p>
 <p>Teman-teman bisa membukanya di dalam <em>browser</em> dengan mengetikkan <a href="http://127.0.0.1:8000" target="_blank">http://127.0.0.1:8000</a>, jika berhasil maka akan menampilkan hasil seperti berikut ini.</p>
+
+![](https://i.imgur.com/b34ZUNM.png)
+
 <h3><a id="content-langkah-4---menjalankan-storage-link" href="#content-langkah-4---menjalankan-storage-link" class="heading-permalink" aria-hidden="true" title="Permalink"></a>Langkah 4 - Menjalankan Storage Link</h3>
 <p>Setelah berhasil belajar membuat <em>project</em> <strong>Laravel</strong> dan menjalankannya, maka sekarang kita akan lanjutkan belajar bagaimana cara menjalankan perintah <code>storage:link</code> di dalam <strong>Laravel</strong>.</p>
 <h3><a id="content-apa-itu-storage-link" href="#content-apa-itu-storage-link" class="heading-permalink" aria-hidden="true" title="Permalink"></a>Apa itu Storage Link?</h3>
