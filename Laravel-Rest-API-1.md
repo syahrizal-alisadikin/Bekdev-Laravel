@@ -518,10 +518,8 @@ namespace App\Http\Controllers\Api;
 </tr>
 </tbody>
 </table></div>
-<p>Di atas, kita membuat contoh data <em>customer</em>, sekarang silahkan klik <code>Send</code>. Dan jika berhasil kita akan mendapatkan <em>response</em> kurang lebih seperti berikut ini :</p>
-<h3>Membuat Model dan Migration Book</h3>
-<p>Sekarang kita lanjutkan belajar membuat <em>Model</em> dan <em>Migration</em> di dalam <strong>Laravel</strong>. Untuk membuat <em>Model</em> dan <em>Migration</em> di dalam <strong>Laravel</strong> kita bisa menggunakan perintah artisan <code>make:model</code>.</p>
-<p>Silahkan teman-teman jalankan perintah berikut ini di dalam terminal/CMD dan pastikan sudah berada di dalam <em>project</em> <strong>Laravel</strong>-nya.</p>
+<p>Di atas, kita membuat contoh data <em>user</em>, sekarang silahkan klik <code>Send</code>. Dan jika berhasil kita akan mendapatkan <em>response</em> kurang lebih seperti berikut ini :</p>
+
 
 ```
 {
