@@ -441,9 +441,9 @@ public function logout(Request $request)
 ```
 <?php
 
+namespace App\Http\Controllers\Api;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Api\AuthController;
 
 Route::get('/user', function (Request $request) {
     return $request->user();
@@ -451,6 +451,7 @@ Route::get('/user', function (Request $request) {
 
 Route::post('login', [AuthController::class, 'login']);
 Route::post('register', [AuthController::class, 'register']);
+
 ```
 
 <p>Di atas, pertama kita set <code>namespace</code> untuk <em>folder</em> <em>controller</em> yang digunakan, yaitu <code>App\Http\Controllers\Api</code>. karena semua <em>controller</em> <em>API</em> kita nanti akan diletakkan di dalam <em>folder</em> tersebut.</p>
