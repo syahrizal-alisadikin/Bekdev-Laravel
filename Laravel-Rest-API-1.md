@@ -266,4 +266,22 @@ class Book extends Model
 }
 ```
 
+<p>Dari perubahan kode di atas, pertama kita <em>import</em> <em>Cast</em> <code>Attribute</code>.</p>
+
+```
+use Illuminate\Database\Eloquent\Casts\Attribute;
+```
+
+<p>kemudian kita membuat <em>method</em> baru dengan nama <code>image()</code>. Di dalam <em>method</em> ini kita melakukan <em>return</em> <em>field</em> <code>image</code> agar menghasilkan <em>full</em> <em>path</em> <em>URL</em> dari <em>folder</em> <em>storage</em>. Jadi ketika kita memanggil <em>field</em> <code>image</code> makan akan otomatis menghasilkan <em>output</em> seperti berikut ini :</p>
+
+```
+domain.com/storage/books/nama_file_image.png
+```
+
+<p>Tapi, jika kita tidak menggunakan fitur <em>Accessor</em>, maka hasilnya akan seperti berikut ini :</p>
+
+```
+nama_file_image.png
+```
+
 <p><em>sumber</em>  <a href="https://santrikoding.com/tutorial-restful-api-laravel-11-1-cara-install-menjalankan-laravel-11" target="_blank">https://santrikoding.com/tutorial-restful-api-laravel-11-1-cara-install-menjalankan-laravel-11</a>.</p>
