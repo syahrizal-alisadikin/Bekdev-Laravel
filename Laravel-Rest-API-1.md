@@ -51,6 +51,17 @@ DB_PASSWORD=
 ```
 
 <p>Di atas, pertama kita ubah driver koneksinya yang semula menggunakan <code>sqlite</code> menjadi <code>mysql</code>. Kemudian untuk <code>DB_DATABASE</code> kita ubah menjadi <code>db_laravel11_api</code>,</p>
+<h3> Menjalankan Proses Migrate</h3>
+<p>Silahkan teman-teman jalankan perintah berikut ini di dalam terminal/CMD dan pastikan berada di dalam <em>project</em> <strong>Laravel</strong>-nya.</p>
+
+```
+php artisan migrate
+```
+<p>Jika muncul pertanyaan seperti berikut ini, maka silahkan ketik <code>yes</code> dan <strong>Enter</strong>.</p>
+
+![Imgur](https://i.imgur.com/9yW3mHK.png)
+
+![Imgur](https://i.imgur.com/jwlKfN5.png)
 
 <h3><a id="content-langkah-3---menjalankan-project-laravel-11" href="#content-langkah-3---menjalankan-project-laravel-11" class="heading-permalink" aria-hidden="true" title="Permalink"></a>Menjalankan Project Laravel 11</h3>
 <p>Sekarang kita akan belajar bagaimana cara menjalankan <em>project</em> <strong>Laravel</strong> <strong>11</strong> yang baru saja kita buat. Silahkan teman-teman jalankan perintah berikut ini di dalam terminal/CMD.</p>
@@ -164,6 +175,40 @@ php artisan make:model Book -m
 <td>untuk menyimpan nama <em>file</em> image yang di <em>upload</em> .</td>
 </tr>
 </tbody>
-</table></div>
+</table>
+</div>
+
+<h3>Menambahkan Mass Assignment</h3>
+<p>Karena <em>field</em> sudah berhasil ditambahkan di dalam <em>file</em> <em>migration</em>, maka langkah berikutnya adalah menambahkan <em><strong>Mass</strong></em> <em><strong>Assignment</strong></em> di dalam <em>Model</em>. Ini bertujuan agar <em>field</em> yang sudah kita tambahkan di atas dapat menyimpan sebuah nilai.</p>
+<p>Silahkan teman-teman buka <em>file</em> <code>app/Models/Post.php</code>, kemudian ubah semua kode-nya menjadi seperti berikut ini.</p>
+
+```
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+
+class Book extends Model
+{
+    use HasFactory;
+    
+    /**
+     * fillable
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'user_id',
+        'name',
+        'harga',
+        'stock',
+        'image',
+    ];
+}
+```
+
+<p>Dari perubahan kode di atas, kita menambahkan properti baru dengan nama <code>$fillable</code>. properti tersebut disebut dengan <em><strong>Mass</strong></em> <em><strong>Assignment</strong></em> dan di dalamnya kita berikan <em>field</em>-<em>field</em> yang sudah kita buat sebelumnya di dalam <em>file</em> <em>migration</em>.</p>
 
 <p><em>sumber</em>  <a href="https://santrikoding.com/tutorial-restful-api-laravel-11-1-cara-install-menjalankan-laravel-11" target="_blank">https://santrikoding.com/tutorial-restful-api-laravel-11-1-cara-install-menjalankan-laravel-11</a>.</p>
