@@ -874,7 +874,7 @@ public function __construct($status, $message, $resource)
 ```
 
 <p>Setelah itu, di dalam <em>method</em> <code>toArray</code> kita ubah bagian <em>return</em>-nya, tujuaanya agar mengembalikan format <em>JSON</em> yang sesuai dengan yang dibutuhkan.</p>
-<p>Jadi, tujuan dari <code>PostResource</code> ini adalah untuk membuat data dari <em>Model</em> <code>Post</code> ke dalam format <em>JSON</em> yang sesuai dengan kebutuhan, termasuk penambahan informasi status dan pesan tertentu.</p>
+<p>Jadi, tujuan dari <code>BookResource</code> ini adalah untuk membuat data dari <em>Model</em> <code>Book</code> ke dalam format <em>JSON</em> yang sesuai dengan kebutuhan, termasuk penambahan informasi status dan pesan tertentu.</p>
 
 <p><em>sumber</em>  <a href="https://laravel.com/docs/11.x/eloquent-resources" target="_blank">https://laravel.com/docs/11.x/eloquent-resources</a>.</p>
 
