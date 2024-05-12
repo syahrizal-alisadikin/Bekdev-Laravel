@@ -793,4 +793,209 @@ domain.com/storage/books/nama_file_image.png
 nama_file_image.png
 ```
 
+<h3> Membuat API Resources</h3>
+<p>Silahkan teman-teman jalankan perintah berikut ini di dalam terminal/CMD dan pastikan sudah berada di dalam <em>project</em> <strong>Laravel</strong>-nya.</p>
+
+```
+php artisan make:resource BookResource
+```
+
+<p>Jika perintah di atas berhasil dijalankan, maka kita akan mendapatkan 1 <em>file</em> baru yang berada di dalam <em>folder</em> <code>app/Http/Resources/BookResource.php</code>.</p>
+<h3> Custom Response</h3>
+<p>Sebenarnya, secara bawaan <em>API</em> <em>Resource</em> yang telah di<em>generate</em> sudah bisa langsung digunakan, tapi karena kita akan menyesuaikan format <em>JSON</em> yang diinginkan, maka kita perlu melakukan sedikit modifikasi di dalam <em>file</em> tersebut.</p>
+<p>Silahkan teman-teman buka <em>file</em> <code>app/Http/Resources/BookResource.php</code>, kemudian ubah semua kode-nya menjadi seperti berikut ini.</p>
+
+```
+<?php
+
+namespace App\Http\Resources;
+
+use Illuminate\Http\Request;
+use Illuminate\Http\Resources\Json\JsonResource;
+
+class BookResource extends JsonResource
+{
+    //define properti
+    public $status;
+    public $message;
+    public $resource;
+
+    /**
+     * __construct
+     *
+     * @param  mixed $status
+     * @param  mixed $message
+     * @param  mixed $resource
+     * @return void
+     */
+    public function __construct($status, $message, $resource)
+    {
+        parent::__construct($resource);
+        $this->status  = $status;
+        $this->message = $message;
+    }
+
+    /**
+     * toArray
+     *
+     * @param  mixed $request
+     * @return array
+     */
+    public function toArray(Request $request): array
+    {
+        return [
+            'success'   => $this->status,
+            'message'   => $this->message,
+            'data'      => $this->resource
+        ];
+    }
+}
+```
+
+<p>Dari perubahan kode di atas, pertama kita menambahkan 3 properti, yaitu:</p>
+
+```
+//define properti
+public $status;
+public $message;
+public $resource;
+```
+
+<p>Properti ini digunakan untuk menyimpan status, pesan, dan data yang akan dikirimkan dalam respons <em>JSON</em>.</p>
+<p>Kemudian kita buat <em>method</em> <code>_construct</code> yang menerima 3 parameter, yaitu <code>$status</code>, <code>$message</code> dan <code>$resource</code>. Konstruktor ini akan dipanggil untuk menginisialisasi nilai dari properti <code>$status</code> dan <code>$message</code> dengan nilai yang diberikan oleh <em>controller</em> nantinya.</p>
+
+```
+public function __construct($status, $message, $resource)
+{
+    parent::__construct($resource);
+    $this->status  = $status;
+    $this->message = $message;
+}
+```
+
+<p>Setelah itu, di dalam <em>method</em> <code>toArray</code> kita ubah bagian <em>return</em>-nya, tujuaanya agar mengembalikan format <em>JSON</em> yang sesuai dengan yang dibutuhkan.</p>
+<p>Jadi, tujuan dari <code>PostResource</code> ini adalah untuk membuat data dari <em>Model</em> <code>Post</code> ke dalam format <em>JSON</em> yang sesuai dengan kebutuhan, termasuk penambahan informasi status dan pesan tertentu.</p>
+
+<p><em>sumber</em>  <a href="https://laravel.com/docs/11.x/eloquent-resources" target="_blank">https://laravel.com/docs/11.x/eloquent-resources</a>.</p>
+
+<h3> Membuat Controller Book</h3>
+<p>Sekarang, silahkan teman-teman jalankan perintah berikut ini di dalam terminal/CMD dan pastikan sudah berada di dalam <em>project</em> <strong>Laravel</strong>-nya.</p>
+
+```
+php artisan make:controller Api/BookController
+```
+
+<p>Jika perintah di atas berhasil dijalankan, maka kita akan mendapatkan <em>file</em> baru yang berada di dalam <em>folder</em> <code>app/Http/Controllers/Api/BookController.php</code>. Silahkan buka <em>file</em> tersebut, kemudian ubah semua kode-nya menjadi seperti berikut ini.</p>
+
+```
+<?php
+
+namespace App\Http\Controllers\Api;
+
+//import model Post
+use App\Models\Book;
+
+use App\Http\Controllers\Controller;
+
+//import resource BookResource
+use App\Http\Resources\BookResource;
+
+class BookController extends Controller
+{
+    /**
+     * index
+     *
+     * @return void
+     */
+    public function index()
+    {
+        //get all books
+        $books = Book::latest()->paginate(5);
+
+        //return collection of books as a resource
+        return new BookResource(true, 'List Data Books', $books);
+    }
+}
+```
+
+<p>Setelah itu, silahkan teman-teman buka <em>file</em> <code>routes/api.php</code>, kemudian ubah kode-nya menjadi seperti berikut ini.</p>
+
+```
+<?php
+
+namespace App\Http\Controllers\Api;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
+
+
+Route::middleware(['auth:sanctum'])->group(function () {
+    //user
+    Route::get('/user', function (Request $request) {
+        return $request->user();
+    });
+
+    //books
+    Route::apiResource('/books',BookController::class);
+});
+
+Route::post('login', [AuthController::class, 'login']);
+Route::post('register', [AuthController::class, 'register']);
+```
+
+<p>Di atas, kita menambahkan <em>route</em> baru dengan jenis <code>apiResource</code> dan memiliki <em>path</em> <code>/books</code>. Untuk memastikan <em>route</em> tersebut berhasil ditambahkan, teman-teman bisa menjalankan perintah berikut ini di dalam terminal/CMD.</p>
+
+```
+php artisan route:list
+```
+
+![Imgur](https://i.imgur.com/K3xRaQB.png)
+
+<h3> Uji Coba Rest API Book</h3>
+<p>Sekarang, silahkan teman-teman buka aplikasi <strong>Postman</strong>, kemudian masukkan <em>URL</em> berikut ini <a href="http://127.0.0.1:8000/api/books" target="_blank">http://127.0.0.1:8000/api/books</a> dan untuk <em>method</em>-nya silahkan pilih <code>GET</code>.</p>
+<p>Jangan Lupa Untuk Mendapatkan <code>Token</code> Terlebih dahulu setelah itu simpan di Header.</p>
+<p>Jika sudah, silahkan klik <code>Send</code> dan jika berhasil maka teman-teman akan mendapatkan hasil seperti berikut ini.</p>
+
+```
+{
+    "success": true,
+    "message": "List Data Books",
+    "data": {
+        "current_page": 1,
+        "data": [],
+        "first_page_url": "http://127.0.0.1:8000/api/books?page=1",
+        "from": null,
+        "last_page": 1,
+        "last_page_url": "http://127.0.0.1:8000/api/books?page=1",
+        "links": [
+            {
+                "url": null,
+                "label": "&laquo; Previous",
+                "active": false
+            },
+            {
+                "url": "http://127.0.0.1:8000/api/books?page=1",
+                "label": "1",
+                "active": true
+            },
+            {
+                "url": null,
+                "label": "Next &raquo;",
+                "active": false
+            }
+        ],
+        "next_page_url": null,
+        "path": "http://127.0.0.1:8000/api/books",
+        "per_page": 5,
+        "prev_page_url": null,
+        "to": null,
+        "total": 0
+    }
+}
+```
+
+![Imgur](https://i.imgur.com/Wb6HdzK.png)
+
+<p>Di atas, kita masih belum menampilkan data apapun, karena memang kita belum memiliki data di dalam <em>database</em>. Dan yang ditampilkan adalah <em>array</em> kosong.</p>
+
+
 <p><em>sumber</em>  <a href="https://santrikoding.com/tutorial-restful-api-laravel-11-1-cara-install-menjalankan-laravel-11" target="_blank">https://santrikoding.com/tutorial-restful-api-laravel-11-1-cara-install-menjalankan-laravel-11</a>.</p>
