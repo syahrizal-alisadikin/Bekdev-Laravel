@@ -1111,5 +1111,22 @@ php artisan route:list
 
 <p>Di atas, kita masih belum menampilkan data apapun, karena memang kita belum memiliki data di dalam <em>database</em>. Dan yang ditampilkan adalah <em>array</em> kosong.</p>
 
+<h3>Tambah Data Book</h3>
+
+![Imgur](https://i.imgur.com/4nxVNwr.png)
+
+![Imgur](https://i.imgur.com/AYx81BV.png)
+
+<h3> Detail Data Book </h3>
+
+![Imgur](https://i.imgur.com/8E121Wl.png)
+
+<h3> Update  Data Book </h3>
+
+![Imgur](https://i.imgur.com/03F0oG4.png)
+
+<h3> Delete  Data Book </h3>
+
+![Imgur](https://i.imgur.com/HYAaJae.png)
 
 <p><em>sumber</em>  <a href="https://santrikoding.com/tutorial-restful-api-laravel-11-1-cara-install-menjalankan-laravel-11" target="_blank">https://santrikoding.com/tutorial-restful-api-laravel-11-1-cara-install-menjalankan-laravel-11</a>.</p>
