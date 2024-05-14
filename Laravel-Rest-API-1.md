@@ -1,5 +1,10 @@
 <p>Halo teman-teman semuanya, pada seri artikel kali ini kita semua akan belajar bagaimana cara membuat <em>Restful</em> <em>API</em> di <strong>Laravel</strong> <strong>11</strong> yang ditunjukkan untuk para pemula. Dimana pada seri ini kita akan mulai materi-nya secara step by step dari dasar sampai testing <em>Rest</em> <em>API</em> yang telah dibuat. Pada pembuatan <em>Rest</em> <em>API</em> ini, kita juga akan belajar melakukan <em>upload</em> gambar di dalam <strong>Laravel</strong>.</p>
 <p>Dan kita juga akan memanfaatkan fitur bawaan dari <strong>Laravel</strong> yang bernama <em>API</em> <em>Resources</em>. Dengan menggunakan <em>API</em> <em>Resources</em>, kita bisa melakukan transformasi data dari <em>Model</em> menjadi format <em>JSON</em> dengan sangat mudah dan cepat.</p>
+
+![Imgur](https://i.imgur.com/PTzq2Qq.jpg)
+
+![Imgur](https://i.imgur.com/GqFvEiq.jpg)
+
 <h3>Tools dan hal-hal teknis yang perlu disiapkan</h3>
 <h4>- Web server (Xampp/Laragon)</h4>
 <h4>- PHP 8.2 </h4>
