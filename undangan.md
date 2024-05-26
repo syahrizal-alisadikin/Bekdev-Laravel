@@ -1,4 +1,4 @@
-# Undangan Ngobar Bareng Laravel
+# Undangan Ngobar (Ngoding Bareng) Framework Laravel
 
 Halo semuanya!
 
