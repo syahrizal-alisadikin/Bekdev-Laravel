@@ -19,7 +19,7 @@ Ngobar Bareng Laravel adalah kesempatan bagi kita semua untuk belajar dan berdis
 
 ### Bagaimana Cara Bergabung?
 Klik tautan berikut untuk bergabung dengan grup kami dan dapatkan informasi lebih lanjut:
-[TAUTAN UNDANGAN GRUP]
+https://chat.whatsapp.com/C3xAqopq1DC4EpLlF7CJjv
 
 Jangan lewatkan kesempatan ini untuk belajar dan berkembang bersama komunitas Laravel di Bekdev. Kami tunggu kehadiran kalian!
 
