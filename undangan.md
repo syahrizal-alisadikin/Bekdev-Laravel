@@ -21,7 +21,7 @@ Ngobar (Ngoding Bareng) Laravel adalah kesempatan bagi kita semua untuk belajar 
 Klik tautan berikut untuk bergabung dengan grup kami dan dapatkan informasi lebih lanjut:
 https://chat.whatsapp.com/C3xAqopq1DC4EpLlF7CJjv
 
-Untuk Member Baru join disini juga, biar bisa diproses dan dimasukan ke grup utama. 
+Untuk Member Baru join disini juga, biar bisa diproses dan dimasukan ke group utama:
 https://chat.whatsapp.com/HFuzXCdxry3EInTxT3iFce
 
 Jangan lewatkan kesempatan ini untuk belajar dan berkembang bersama komunitas Laravel di Bekdev. Kami tunggu kehadiran kalian!
