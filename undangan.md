@@ -18,7 +18,8 @@ Ngobar (Ngoding Bareng) Laravel adalah kesempatan bagi kita semua untuk belajar 
 - **Komunitas:** Bangun jaringan dan berkenalan dengan developer lain.
 
 ### Bagaimana Cara Bergabung?
-Klik tautan berikut untuk bergabung dengan grup kami dan dapatkan informasi lebih lanjut:
+Klik tautan berikut untuk bergabung dengan grup kami dan dapatkan informasi lebih lanjut,
+Link Group WA Laravel:
 <a href="https://chat.whatsapp.com/C3xAqopq1DC4EpLlF7CJjv" target="_blank">Join Group</a>
 
 
