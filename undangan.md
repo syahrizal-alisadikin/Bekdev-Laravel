@@ -23,7 +23,7 @@ https://chat.whatsapp.com/C3xAqopq1DC4EpLlF7CJjv
 
 Jangan lewatkan kesempatan ini untuk belajar dan berkembang bersama komunitas Laravel di Bekdev. Kami tunggu kehadiran kalian!
 
-Terima kasih, dan sampai jumpa di acara Ngobar Bareng Laravel!
+Terima kasih, dan sampai jumpa di acara Ngobar Laravel!
 
 Salam,
 **Komunitas Bekdev**
