@@ -158,3 +158,10 @@ return Application::configure(basePath: dirname(__DIR__))
         //
     })->create();
 ```
+
+### Kesimpulan
+
+<p>Pada artikel ini, kita telah belajar Installasi  <strong>Laravel Spatie Permission</strong>.</p>
+<p>Jika teman-teman ada kendala saat belajar, silahkan bisa bertanya melalui kolom komentar atau <em>group</em> <strong>Telegram</strong> <strong>SantriKoding</strong>.</p>
+
+Semoga bermanfaat! 😊
