@@ -1,0 +1,1 @@
+Untuk membuat data secara <em>global</em>, kita bisa mendefinisikannya di dalam <em>middleware</em> yang sudah disediakan oleh Inertia.js. Disini kita akan menambahkan beberapa data yang mungkin nantinya akan kita gunakan terus di dalam halaman.
