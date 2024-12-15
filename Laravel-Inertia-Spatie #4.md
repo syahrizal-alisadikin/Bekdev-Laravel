@@ -261,3 +261,10 @@ php artisan migrate --seed
 Perintah di atas akan menjalankan <em>migration</em> <em>table</em> dan kita tambahkan <em>flag</em> <code>-- seed</code> yang artinya sekaligus menjalankan perintah <em>database</em> <em>seeder</em>.
 
 ![](https://i.imgur.com/eJIGhHQ.png)
+
+### Kesimpulan
+
+<p>Pada artikel ini, kita telah belajar  <strong>Seeder </strong> Di <strong>Laravel</strong>.</p>
+<p>Jika teman-teman ada kendala saat belajar, silahkan bisa bertanya melalui kolom komentar atau <em>group</em> <strong>Telegram</strong> <strong>SantriKoding</strong>.</p>
+
+Semoga bermanfaat! 😊
