@@ -58,3 +58,26 @@ Selanjutnya kita membuat sebuah <strong>React Functional Component</strong> deng
 ```
 export default function Input({label, type, className, errors, ...props})
 ```
+### Langkah 3 - Component Checkbox
+Silahkan buka <em>file</em> <code>app/resources/js/Components/Checkbox.jsx</code>, kemudian ubah kode-nya menjadi seperti berikut ini :
+
+```
+export default function Checkbox({ label, ...props }) {
+    return (
+        <div>
+            <div className="flex flex-row items-center gap-2">
+                <input
+                    {...props}
+                    type="checkbox"
+                    className={
+                        "rounded-md bg-white border-gray-200 checked:bg-teal-500"
+                    }
+                />
+                <label className="text-sm text-gray-700">{label}</label>
+            </div>
+        </div>
+    );
+}
+```
+
+Di atas kita menambahkan <em>props</em>  <strong> label</strong> 
