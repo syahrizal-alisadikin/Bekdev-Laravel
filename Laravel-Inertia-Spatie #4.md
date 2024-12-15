@@ -221,7 +221,7 @@ Setelah <em>role</em> tersebut sudah memiliki semua hak akses, maka selanjutnya 
 //assign role to user
 $user->assignRole($role);
 ```
-### Langkah 3 - Register Seeder
+### Langkah 4 - Register Seeder
 
 Setelah berhasil membuat <em>seeder</em> <em>user</em>, sekarang kita akan <em>register</em> di dalam <em>class</em> <code>DatabaseSeeder</code>. Silahkan buka <em>file</em> <code>database/seeders/DatabaseSeeder.php</code>, kemudian ubah kode-nya menjadi seperti berikut ini :
 
@@ -250,3 +250,14 @@ class DatabaseSeeder extends Seeder
 
 Di atas, kita telah memanggil <em>class</em> <code>RolesTableSeeder</code>, <code>PermissionsTableSeeder</code>,  <code>UserTableSeeder</code> di dalam <em>method</em> <code>run</code>. Dan untuk urutannya jangan sampai keliru ya. Karena prosesnya akan dieksekusi secara berurutan.
 
+### Langkah 5 - Menjalankan Migration dan Seeder
+
+Silahkan jalankan perintah berikut ini di dalam terminal/CMD dan pastikan berada di dalam <em>project</em> Laravel-nya.
+
+```
+php artisan migrate --seed
+```
+
+Perintah di atas akan menjalankan <em>migration</em> <em>table</em> dan kita tambahkan <em>flag</em> <code>-- seed</code> yang artinya sekaligus menjalankan perintah <em>database</em> <em>seeder</em>.
+
+![](https://i.imgur.com/eJIGhHQ.png)
