@@ -198,7 +198,31 @@ const handleSearchData = (e) => {
     get(`${url}?search=${data.search}`)
 }
 ```
-### Langkah 7 - Component Table 
+
+### Langkah 7 - Component Card 
+Kita lanjutkan untuk menambahkan <em>Component</em> <code>Card</code>.
+Silahkan Buat file baru  dengan nama <code>Card.jsx</code> dan silahkan masukan kode berikut :
+
+```
+import React from 'react'
+
+export default function Card({ title, children, className }) {
+    return (
+        <>
+            <div className={`p-4 rounded-t-lg border ${className} bg-white`}>
+                <div className='flex items-center gap-2 font-semibold text-sm text-gray-700 capitalize'>
+                    {title}
+                </div>
+            </div>
+            <div className='bg-white p-4 border border-t-0 border-b rounded-b-lg'>
+                {children}
+            </div>
+        </>
+    )
+}
+```
+
+### Langkah 8 - Component Table 
 
 Kita lanjutkan untuk menambahkan <em>Component</em> <code>Table</code>.
 Silahkan Buat file baru  dengan nama <code>Table.jsx</code> dan silahkan masukan kode berikut :
@@ -294,7 +318,7 @@ Table.Empty = Empty;
 export default Table;
 ```
 
-### Langkah 8 - Component Pagination
+### Langkah 9 - Component Pagination
 
 Kita lanjutkan untuk menambahkan <em>Component</em> <code>Pagination</code>.
 Silahkan Buat file baru  dengan nama <code>Pagination.jsx</code> dan silahkan masukan kode berikut :
@@ -347,7 +371,7 @@ Selanjutnya kita membuat sebuah <strong>React Functional Component</strong> deng
 export default function Pagination({ links })
 ```
 
-### Langkah 9 - Component Button
+### Langkah 10 - Component Button
 
 Kita lanjutkan untuk menambahkan <em>Component</em> <code>Button</code>.
 Silahkan Buat file baru  dengan nama <code>Button.jsx</code> dan silahkan masukan kode berikut :
