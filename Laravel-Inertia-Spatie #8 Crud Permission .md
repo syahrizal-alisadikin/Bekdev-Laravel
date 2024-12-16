@@ -380,3 +380,340 @@ export default function AuthenticatedLayout({ header, children }) {
 }
 ```
 Pada kode diatas, kita memanggil 2 buah component dengan nama <code>NavLink</code> dan <code>ResponsiveNavLink</code> dengan props <code>href</code> yang kita set ke route yang bernama <code>permissions.index</code> dan props <code>active</code> kita set ke semua route <code>permissions*</code> dan tidak lupa kita tambahan pengecekan sebuah hak akses yang dimiliki oleh user menggunakan <code>utils hasAnyPermissions</code> yang telah kita buat sebelumnya.
+
+### Langkah 4 - Menampilkan data Permission
+
+Setelah berhasil membuat sebuah Route dan Navigasi Permission, sekarang kita akan lanjutkan untuk pembuatan view-nya, disini kita akan membuat 3 view sekaligus yaitu <code>index</code>, <code>create</code>, dan <code>edit</code>
+
+Silahkan teman - teman buat folder baru dengan nama <em>Permissions</em> kemudian didalam folder tersebut buat file baru dengan nama <code>Index.jsx</code> yang akan kita letakan di <code>resources/js/Pages</code>, kemudian ubah kodenya menjadi seperti berikut ini.
+
+```
+import React from 'react'
+import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
+import Container from '@/Components/Container';
+import Table from '@/Components/Table';
+import Button from '@/Components/Button';
+import Pagination from '@/Components/Pagination';
+import { Head, usePage } from '@inertiajs/react';
+import Search from '@/Components/Search';
+import hasAnyPermission from '@/Utils/Permissions';
+export default function Index({auth,filters}) {
+
+    // destruct permissions props
+    const { permissions } = usePage().props;
+
+    return (
+        <AuthenticatedLayout
+            user={auth.user}
+            header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">Permissions</h2>}
+        >
+            <Head title={'Permissions'}/>
+            <Container>
+                <div className='mb-4 flex items-center justify-between gap-4'>
+                    {hasAnyPermission(['permissions create']) &&
+                        <Button type={'add'} url={route('permissions.create')}/>
+                    }
+                    <div className='w-full md:w-4/6'>
+                        <Search url={route('permissions.index')} placeholder={'Search permissions data by name...'} filter={filters}/>
+                    </div>
+                </div>
+                <Table.Card title={'Permissions'}>
+                    <Table>
+                        <Table.Thead>
+                            <tr>
+                                <Table.Th>#</Table.Th>
+                                <Table.Th>Permissions Name</Table.Th>
+                                <Table.Th>Action</Table.Th>
+                            </tr>
+                        </Table.Thead>
+                        <Table.Tbody>
+                            {permissions.data.map((permission, i) => (
+                                <tr key={i}>
+                                    <Table.Td>{++i + (permissions.current_page-1) * permissions.per_page}</Table.Td>
+                                    <Table.Td>{permission.name}</Table.Td>
+                                    <Table.Td>
+                                        <div className='flex items-center gap-2'>
+                                            {hasAnyPermission(['permissions edit']) &&
+                                                <Button type={'edit'} url={route('permissions.edit', permission.id)}/>
+                                            }
+                                            {hasAnyPermission(['permissions delete']) &&
+                                                <Button type={'delete'} url={route('permissions.destroy', permission.id)}/>
+                                            }
+                                        </div>
+                                    </Table.Td>
+                                </tr>
+                            ))}
+                        </Table.Tbody>
+                    </Table>
+                </Table.Card>
+                <div className='flex items-center justify-center'>
+                    {permissions.last_page !== 1 && (<Pagination links={permissions.links}/>)}
+                </div>
+            </Container>
+        </AuthenticatedLayout>
+    )
+}
+```
+
+Pada kode diatas, pertama - tama kita import beberapa file yang kita butuhkan
+
+```
+import React from 'react'
+import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
+import Container from '@/Components/Container';
+import Table from '@/Components/Table';
+import Button from '@/Components/Button';
+import Pagination from '@/Components/Pagination';
+import { Head, usePage } from '@inertiajs/react';
+import Search from '@/Components/Search';
+import hasAnyPermission from '@/Utils/Permissions';
+```
+
+Selanjutnya kita membuat sebuah React Function Component dengan props auth dan filters.
+
+```
+export default function Index({auth,filters})
+```
+
+Selanjutnya kita memanggil sebuah utils <code>hasAnyPermissions</code> yang telah kita buat sebelumnya untuk melakukan pengecekan apakah user memiliki hak akses untuk melakukan penambahan data <code>permissions</code>.
+
+```
+{hasAnyPermission(['permissions create']) &&
+  <Button type={'add'} url={route('permissions.create')}/>
+}
+```
+
+### Langkah 5 - Membuat create Permission
+
+Silahkan teman - teman  buat file baru dengan nama <code>Create.jsx</code> yang akan kita letakan di <code>resources/js/Pages/Permissions</code>, kemudian ubah kodenya menjadi seperti berikut ini.
+
+```
+import React from 'react'
+import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
+import Container from '@/Components/Container';
+import { Head, useForm } from '@inertiajs/react';
+import Input from '@/Components/Input';
+import Button from '@/Components/Button';
+import Card from '@/Components/Card';
+import Swal from 'sweetalert2';
+export default function Create({auth}) {
+
+    // define state with helper inertia
+    const { data, setData, post, errors } = useForm({
+        name : ''
+    });
+
+    // define method handleStoreData
+    const handleStoreData = async (e) => {
+        e.preventDefault();
+
+        post(route('permissions.store'), {
+            onSuccess: () => {
+                Swal.fire({
+                    title: 'Success!',
+                    text: 'Data created successfully!',
+                    icon: 'success',
+                    showConfirmButton: false,
+                    timer: 1500
+                })
+            }
+        });
+    }
+
+    return (
+        <AuthenticatedLayout
+            user={auth.user}
+            header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">Create Permission</h2>}
+        >
+            <Head title={'Create Permissions'}/>
+            <Container>
+                <Card title={'Create new permission'}>
+                    <form onSubmit={handleStoreData}>
+                        <div className='mb-4'>
+                            <Input label={'Permission Name'} type={'text'} value={data.name} onChange={e => setData('name', e.target.value)} errors={errors.name} placeholder="Input permission name.."/>
+                        </div>
+                        <div className='flex items-center gap-2'>
+                            <Button type={'submit'} />
+                            <Button type={'cancel'} url={route('permissions.index')}/>
+                        </div>
+                    </form>
+                </Card>
+            </Container>
+        </AuthenticatedLayout>
+    )
+}
+
+```
+
+Pada kode diatas, pertama - tama kita import beberapa file yang kita butuhkan
+
+```
+import React from 'react'
+import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
+import Container from '@/Components/Container';
+import { Head, useForm } from '@inertiajs/react';
+import Input from '@/Components/Input';
+import Button from '@/Components/Button';
+import Card from '@/Components/Card';
+import Swal from 'sweetalert2';
+```
+
+Kemudian kita membuat sebuah state menggunakan form helper dari inertia.
+
+```
+const { data, setData, post, errors } = useForm({
+    name : ''
+});
+```
+
+Selanjutnya kita membuat sebuah method baru dengan nama <code>handleStoreData</code> yang kita gunakan untuk mengirimkan data kita ke server menggunakan form helper yang telah disediakan oleh inertia.
+
+```
+const handleStoreData = async (e) => {
+    e.preventDefault();
+
+    post(route('permissions.store'), {
+        onSuccess: () => {
+            Swal.fire({
+                title: 'Success!',
+                text: 'Data created successfully!',
+                icon: 'success',
+                showConfirmButton: false,
+                timer: 1500
+            })
+        }
+    });
+}
+```
+
+Jika kita perhatikan, pada method post kita arahkan ke sebuah route yang bernama <code>permissions.store</code> dan ketika data berhasil dikirimkan, kita memanggil sebuah <code>sweet alert</code>.
+
+```
+post(route('permissions.store'), {
+    onSuccess: () => {
+        Swal.fire({
+            title: 'Success!',
+            text: 'Data created successfully!',
+            icon: 'success',
+            showConfirmButton: false,
+            timer: 1500
+        })
+    }
+});
+```
+
+### Langkah 6 - Membuat edit Permission
+
+Silahkan teman - teman  buat file baru dengan nama <code>Edit.jsx</code> yang akan kita letakan di <code>resources/js/Pages/Permissions</code>, kemudian ubah kodenya menjadi seperti berikut ini.
+
+```
+import React from 'react'
+import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
+import Container from '@/Components/Container';
+import { Head, useForm, usePage } from '@inertiajs/react';
+import Input from '@/Components/Input';
+import Button from '@/Components/Button';
+import Card from '@/Components/Card';
+import Swal from 'sweetalert2';
+export default function Edit({auth}) {
+
+    // destruct permissions from usepage props
+    const { permission } = usePage().props;
+
+    // define state with helper inertia
+    const { data, setData, post, errors } = useForm({
+        name : permission.name,
+        _method: 'put'
+    });
+
+    // define method handleUpdateData
+    const handleUpdateData = async (e) => {
+        e.preventDefault();
+
+        post(route('permissions.update', permission.id), {
+            onSuccess: () => {
+                Swal.fire({
+                    title: 'Success!',
+                    text: 'Data updated successfully!',
+                    icon: 'success',
+                    showConfirmButton: false,
+                    timer: 1500
+                })
+            }
+        });
+    }
+
+    return (
+        <AuthenticatedLayout
+            user={auth.user}
+            header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">Edit Permission</h2>}
+        >
+            <Head title={'Edit Permissions'}/>
+            <Container>
+                <Card title={'Edit permission'}>
+                    <form onSubmit={handleUpdateData}>
+                        <div className='mb-4'>
+                            <Input label={'Permission Name'} type={'text'} value={data.name} onChange={e => setData('name', e.target.value)} errors={errors.name} placeholder="Input permission name.."/>
+                        </div>
+                        <div className='flex items-center gap-2'>
+                            <Button type={'submit'} />
+                            <Button type={'cancel'} url={route('permissions.index')}/>
+                        </div>
+                    </form>
+                </Card>
+            </Container>
+        </AuthenticatedLayout>
+    )
+}
+```
+
+Pada kode diatas, pertama - tama kita import beberapa file yang kita butuhkan.
+
+```
+import React from 'react'
+import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
+import Container from '@/Components/Container';
+import { Head, useForm, usePage } from '@inertiajs/react';
+import Input from '@/Components/Input';
+import Button from '@/Components/Button';
+import Card from '@/Components/Card';
+import Swal from 'sweetalert2';
+```
+
+Kemudian kita membuat sebuah state menggunakan form helper dari inertia.
+
+```
+const { data, setData, post, errors } = useForm({
+    name : permission.name,
+    _method: 'put'
+});
+```
+
+Selanjutnya kita membuat sebuah method baru dengan nama <code>handleUpdateData</code> yang kita gunakan untuk mengirimkan data kita ke server menggunakan form helper yang telah disediakan oleh inertia.
+
+```
+const handleUpdateData = async (e) => {
+    e.preventDefault();
+
+    post(route('permissions.update', permission.id), {
+        onSuccess: () => {
+            Swal.fire({
+                title: 'Success!',
+                text: 'Data updated successfully!',
+                icon: 'success',
+                showConfirmButton: false,
+                timer: 1500
+            })
+        }
+    });
+}
+```
+Sumber : [membuat-module-permission-dengan-inertia-react](https://jurnalkoding.com/series/tutorial-laravel-inertia-roles-permissions/tutorial-inertia-roles-permissions-12-membuat-module-permission-dengan-inertia-react) 
+
+### kesimpulan
+
+<p>Pada artikel ini, kita telah belajar membuat <strong>CRUD (Create,Read,Update,Delete) </strong>  <strong>Permission</strong>.</p>
+
+<p>Jika teman-teman ada kendala saat belajar, silahkan bisa bertanya melalui kolom komentar atau <em>group</em> <strong>Telegram</strong> <strong>SantriKoding</strong>.</p>
+
+Semoga bermanfaat! 😊
