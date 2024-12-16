@@ -68,3 +68,10 @@ permissions.forEach(function(item){
 ```
 
 Sumber : https://jurnalkoding.com/series/tutorial-laravel-inertia-roles-permissions/tutorial-inertia-roles-permissions-9-membuat-utils-permissions-dengan-inertia-react
+
+### Kesimpulan
+
+<p>Pada artikel ini, kita telah belajar  <strong>Utils Permission </strong> Di <strong>Laravel Inertia React</strong>.</p>
+<p>Jika teman-teman ada kendala saat belajar, silahkan bisa bertanya melalui kolom komentar atau <em>group</em> <strong>Telegram</strong> <strong>SantriKoding</strong>.</p>
+
+Semoga bermanfaat! 😊
