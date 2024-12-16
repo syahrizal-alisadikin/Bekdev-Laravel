@@ -80,4 +80,49 @@ export default function Checkbox({ label, ...props }) {
 }
 ```
 
-Di atas kita menambahkan <em>props</em>  <strong> label</strong> 
+Di atas kita menambahkan <em>props</em>  <strong> label</strong>.
+
+### Langkah 4 - Component Container
+Kita lanjutkan untuk menambahkan <em>Component</em> <code>Container</code>.
+Silahkan Buat file baru  dengan nama <code>Container.jsx</code> dan silahkan masukan kode berikut :
+
+```
+export default function Container({children}) {
+    return (
+        <div className="py-12">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                {children}
+            </div>
+        </div>
+    )
+}
+```
+
+pada kode diatas kita membuat sebuah <strong>React Functional Component</strong> dengan props  <code>children</code>.
+
+### Langkah 5 - Component Textarea
+
+Kita lanjutkan untuk menambahkan <em>Component</em> <code>Textarea</code>.
+Silahkan Buat file baru  dengan nama <code>Textarea.jsx</code> dan silahkan masukan kode berikut :
+
+```
+export default function Textarea({label, className, errors,...props}) {
+    return (
+        <div className='flex flex-col gap-2'>
+            <label className='text-gray-600 dark:text-gray-500 text-sm'>
+                {label}
+            </label>
+            <textarea
+                className={`w-full px-4 py-2 border text-sm rounded-md focus:outline-none focus:ring-0 bg-white text-gray-700 focus:border-gray-200 border-gray-200 ${className}`}
+                {...props}
+            />
+            {errors && (
+                <small className='text-xs text-red-500'>{errors}</small>
+            )}
+        </div>
+    )
+}
+```
+
+pada kode diatas kita membuat sebuah <strong>React Functional Component</strong> dengan beberapa props  <code>label</code>,<code>className</code>,<code>errors</code> dan <code>...props</code>.
+
