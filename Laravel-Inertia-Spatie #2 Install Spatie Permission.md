@@ -103,6 +103,11 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+   public function getUserPermissions()
+    {
+        return $this->getAllPermissions()->mapWithKeys(fn($permission) => [$permission['name'] => true]);
+    }
 }
 
 ```
