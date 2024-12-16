@@ -512,8 +512,8 @@ Swal.fire({
 })
 ```
 Sumber : [membuat-reusable-component-dengan-react](https://jurnalkoding.com/series/tutorial-laravel-inertia-roles-permissions/tutorial-inertia-roles-permissions-8-membuat-reusable-component-dengan-react) 
-### kesimpulan
 
+### kesimpulan
 
 <p>Pada artikel ini, kita telah belajar membuat <strong>Component </strong> Di <strong>React Js</strong>.</p>
 
