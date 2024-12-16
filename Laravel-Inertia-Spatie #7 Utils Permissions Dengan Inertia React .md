@@ -67,7 +67,6 @@ permissions.forEach(function(item){
 });
 ```
 
-Sumber : 
 Sumber : [membuat-utils-permissions-dengan-inertia-react](https://jurnalkoding.com/series/tutorial-laravel-inertia-roles-permissions/tutorial-inertia-roles-permissions-9-membuat-utils-permissions-dengan-inertia-react) 
 ### Kesimpulan
 
