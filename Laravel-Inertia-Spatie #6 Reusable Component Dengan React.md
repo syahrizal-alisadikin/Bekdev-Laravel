@@ -392,7 +392,7 @@ Swal.fire({
     cancelButtonText: 'Cancel'
 })
 ```
-Sumber : [membuat-reusable-component-dengan-reac](https://jurnalkoding.com/series/tutorial-laravel-inertia-roles-permissions/tutorial-inertia-roles-permissions-8-membuat-reusable-component-dengan-react) 
+Sumber : [membuat-reusable-component-dengan-react](https://jurnalkoding.com/series/tutorial-laravel-inertia-roles-permissions/tutorial-inertia-roles-permissions-8-membuat-reusable-component-dengan-react) 
 ### kesimpulan
 
 
