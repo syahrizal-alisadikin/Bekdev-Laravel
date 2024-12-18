@@ -947,21 +947,7 @@ export default function Edit({auth}) {
                             </div>
                             <Select2 onChange={handleSelectedRoles}  defaultOptions={data.filterRole} options={formattedRoles}  placeholder="Pilih Role..." />
                         </div>
-                        {/* <div className='mb-4'>
-                            <div className={`p-4 rounded-t-lg border bg-white`}>
-                                <div className='flex items-center gap-2 text-sm text-gray-700'>
-                                    Roles
-                                </div>
-                            </div>
-                            <div className='p-4 rounded-b-lg border border-t-0 bg-gray-100'>
-                                <div className='flex flex-row flex-wrap gap-4'>
-                                    {roles.map((role, i) => (
-                                        <Checkbox label={role.name} value={role.name} onChange={handleSelectedRoles} defaultChecked={data.selectedRoles.includes(role.name)} key={i}/>
-                                    ))}
-                                </div>
-                                {errors.selectedRoles && <div className='text-xs text-red-500 mt-4'>{errors.selectedRoles}</div>}
-                            </div>
-                        </div> */}
+                       
                         <div className='flex items-center gap-2'>
                             <Button type={'submit'} />
                             <Button type={'cancel'} url={route('users.index')}/>
