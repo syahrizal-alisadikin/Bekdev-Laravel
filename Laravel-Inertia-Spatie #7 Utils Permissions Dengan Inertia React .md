@@ -26,6 +26,8 @@ export default function hasAnyPermission(permissions){
             hasPermission = true;
     });
 
+ return hasPermission;
+
    
 }
 ```
