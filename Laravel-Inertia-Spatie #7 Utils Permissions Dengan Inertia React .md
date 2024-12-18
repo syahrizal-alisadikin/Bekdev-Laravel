@@ -2,7 +2,7 @@ Disini kita akan membuat 1 buah <em>Utils</em> <code>Permission </code>  yang di
 
 ### Langkah 1 - Membuat Utils Permission
 
-Silahkan buat <em>folder</em> baru dengan nama <code>Utils</code> di dalam <em>folder</em> <code>app/Resources/Js</code>, setelah itu di dalam <em>folder</em> <code>app/Resources/Js/Utils</code> silahkan buat <em>file</em> baru dengan nama <code>Permissions.jsx</code> dan masukkan kode berikut ini :
+Silahkan buat <em>folder</em> baru dengan nama <code>Utils</code> di dalam <em>folder</em> <code>resources/js</code>, setelah itu di dalam <em>folder</em> <code>resources/js/Utils</code> silahkan buat <em>file</em> baru dengan nama <code>Permissions.jsx</code> dan masukkan kode berikut ini :
 
 ```
 import { usePage } from "@inertiajs/react";
