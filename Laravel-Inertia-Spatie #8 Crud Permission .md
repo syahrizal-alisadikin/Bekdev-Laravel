@@ -472,7 +472,7 @@ import hasAnyPermission from '@/Utils/Permissions';
 Selanjutnya kita membuat sebuah React Function Component dengan props auth dan filters.
 
 ```
-export default function Index({auth,filters})
+export default function Index({auth})
 ```
 
 Selanjutnya kita memanggil sebuah utils <code>hasAnyPermissions</code> yang telah kita buat sebelumnya untuk melakukan pengecekan apakah user memiliki hak akses untuk melakukan penambahan data <code>permissions</code>.
