@@ -8,7 +8,7 @@ Dikarenakan kita akan menggunakan select2, disini kita akan lakukan installasi t
 npm i --save react-select
 ```
 
-Kita lanjutkan untuk menambahkan Component Select2. Silahkan Buat file baru dengan nama Select2.jsx di dalam folder <code>view/resources/js/Components/</code> dan silahkan masukan kode berikut :
+Kita lanjutkan untuk menambahkan Component Select2. Silahkan Buat file baru dengan nama Select2.jsx di dalam folder <code>resources/js/Components/</code> dan silahkan masukan kode berikut :
 
 ```
 import React from 'react'
