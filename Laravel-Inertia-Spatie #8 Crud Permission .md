@@ -397,10 +397,10 @@ import Pagination from '@/Components/Pagination';
 import { Head, usePage } from '@inertiajs/react';
 import Search from '@/Components/Search';
 import hasAnyPermission from '@/Utils/Permissions';
-export default function Index({auth,filters}) {
+export default function Index({auth}) {
 
     // destruct permissions props
-    const { permissions } = usePage().props;
+    const { permissions,filters } = usePage().props;
 
     return (
         <AuthenticatedLayout
