@@ -458,3 +458,561 @@ export default function AuthenticatedLayout({ header, children }) {
     );
 }
 ```
+
+### Langkah 4 - Menampilkan data Roles
+
+Setelah berhasil membuat sebuah Route dan Navigasi Role, sekarang kita akan lanjutkan untuk pembuatan view-nya, disini kita akan membuat 3 view sekaligus yaitu <code>index</code>, <code>create</code>, dan <code>edit</code>
+
+Silahkan teman - teman buat folder baru dengan nama <em>Roles</em> kemudian didalam folder tersebut buat file baru dengan nama <code>Index.jsx</code> yang akan kita letakan di <code>resources/js/Pages</code>, kemudian ubah kodenya menjadi seperti berikut ini.
+
+```
+import React from "react";
+import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
+import Container from "@/Components/Container";
+import Table from "@/Components/Table";
+import Button from "@/Components/Button";
+import Pagination from "@/Components/Pagination";
+import { Head, usePage } from "@inertiajs/react";
+import Search from "@/Components/Search";
+import hasAnyPermission from "@/Utils/Permissions";
+export default function Index({ auth }) {
+    // destruct permissions props
+    const { roles ,filters} = usePage().props;
+
+    return (
+        <AuthenticatedLayout
+            user={auth.user}
+            header={
+                <h2 className="font-semibold text-xl text-gray-800 leading-tight">
+                    Roles
+                </h2>
+            }
+        >
+            <Head title={"Roles"} />
+            <Container>
+                <div className="mb-4 flex items-center justify-between gap-4">
+                    {hasAnyPermission(["roles create"]) && (
+                        <Button type={"add"} url={route("roles.create")} />
+                    )}
+                    <div className="w-full md:w-4/6">
+                        <Search
+                            url={route("roles.index")}
+                            placeholder={"Search roles data by name..."}
+                            filter={filters}
+                        />
+                    </div>
+                </div>
+                <Table.Card title={"Roles"}>
+                    <Table>
+                        <Table.Thead>
+                            <tr>
+                                <Table.Th>#</Table.Th>
+                                <Table.Th>Role Name</Table.Th>
+                                <Table.Th>Permissions</Table.Th>
+                                <Table.Th>Action</Table.Th>
+                            </tr>
+                        </Table.Thead>
+                        <Table.Tbody>
+                            {roles.data.map((role, i) => (
+                                <tr key={i}>
+                                    <Table.Td>
+                                        {++i +
+                                            (roles.current_page - 1) *
+                                                roles.per_page}
+                                    </Table.Td>
+                                    <Table.Td>{role.name}</Table.Td>
+                                    <Table.Td>
+                                        <div className="flex items-center gap-2 flex-wrap">
+                                            {role.name == "super-admin" ? (
+                                                <span className="inline-flex items-center px-3 py-1 rounded-full text-sm bg-sky-100 text-sky-700">
+                                                    all-permissions
+                                                </span>
+                                            ) : (
+                                                role.permissions.map(
+                                                    (permission, i) => (
+                                                        <span
+                                                            className="inline-flex items-center px-3 py-1 rounded-full text-sm bg-sky-100 text-sky-700"
+                                                            key={i}
+                                                        >
+                                                            {role.name ==
+                                                            "super-admin"
+                                                                ? "all-permissions"
+                                                                : permission.name}
+                                                        </span>
+                                                    )
+                                                )
+                                            )}
+                                        </div>
+                                    </Table.Td>
+                                    <Table.Td>
+                                        <div className="flex items-center gap-2">
+                                            {hasAnyPermission([
+                                                "roles edit",
+                                            ]) && (
+                                                <Button
+                                                    type={"edit"}
+                                                    url={route(
+                                                        "roles.edit",
+                                                        role.id
+                                                    )}
+                                                />
+                                            )}
+                                            {hasAnyPermission([
+                                                "roles delete",
+                                            ]) && (
+                                                <Button
+                                                    type={"delete"}
+                                                    url={route(
+                                                        "roles.destroy",
+                                                        role.id
+                                                    )}
+                                                />
+                                            )}
+                                        </div>
+                                    </Table.Td>
+                                </tr>
+                            ))}
+                        </Table.Tbody>
+                    </Table>
+                </Table.Card>
+                <div className="flex items-center justify-center">
+                    {roles.last_page !== 1 && (
+                        <Pagination links={roles.links} />
+                    )}
+                </div>
+            </Container>
+        </AuthenticatedLayout>
+    );
+}
+```
+Pada kode diatas, pertama - tama kita import beberapa file yang kita butuhkan
+
+```
+import React from "react";
+import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
+import Container from "@/Components/Container";
+import Table from "@/Components/Table";
+import Button from "@/Components/Button";
+import Pagination from "@/Components/Pagination";
+import { Head, usePage } from "@inertiajs/react";
+import Search from "@/Components/Search";
+import hasAnyPermission from "@/Utils/Permissions";
+```
+
+Selanjutnya kita membuat sebuah React Function Component dengan props auth.
+
+```
+export default function Index({auth})
+```
+
+Selanjutnya kita memanggil sebuah utils <code>hasAnyPermissions</code> yang telah kita buat sebelumnya untuk melakukan pengecekan apakah user memiliki hak akses untuk melakukan penambahan data <code>roles</code>.
+
+```
+{hasAnyPermission(['roles create']) &&
+  <Button type={'add'} url={route('roles.create')}/>
+}
+```
+
+### Langkah 5 - Membuat create Roles
+
+Silahkan teman - teman  buat file baru dengan nama <code>Create.jsx</code> yang akan kita letakan di <code>resources/js/Pages/Roles</code>, kemudian ubah kodenya menjadi seperti berikut ini.
+
+```
+import React from "react";
+import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
+import Container from "@/Components/Container";
+import { Head, useForm, usePage } from "@inertiajs/react";
+import Input from "@/Components/Input";
+import Button from "@/Components/Button";
+import Card from "@/Components/Card";
+import Checkbox from "@/Components/Checkbox";
+import Swal from "sweetalert2";
+export default function Create({ auth }) {
+    // destruct permissions from usepage props
+    const { permissions } = usePage().props;
+
+    // define state with helper inertia
+    const { data, setData, post, errors, processing } = useForm({
+        name: "",
+        selectedPermissions: [],
+    });
+
+    // define method handleSelectedPermissions
+    const handleSelectedPermissions = (e) => {
+        let items = data.selectedPermissions;
+
+        items.push(e.target.value);
+
+        setData("selectedPermissions", items);
+    };
+
+    // define method handleStoreData
+    const handleStoreData = async (e) => {
+        e.preventDefault();
+
+        post(route("roles.store"), {
+            onSuccess: () => {
+                Swal.fire({
+                    title: "Success!",
+                    text: "Data created successfully!",
+                    icon: "success",
+                    showConfirmButton: false,
+                    timer: 1500,
+                });
+            },
+        });
+    };
+
+    return (
+        <AuthenticatedLayout
+            user={auth.user}
+            header={
+                <h2 className="font-semibold text-xl text-gray-800 leading-tight">
+                    Create Role
+                </h2>
+            }
+        >
+            <Head title={"Create Roles"} />
+            <Container>
+                <Card title={"Create new role"}>
+                    <form onSubmit={handleStoreData}>
+                        <div className="mb-4">
+                            <Input
+                                label={"Role Name"}
+                                type={"text"}
+                                value={data.name}
+                                onChange={(e) =>
+                                    setData("name", e.target.value)
+                                }
+                                errors={errors.name}
+                                placeholder="Input role name.."
+                            />
+                        </div>
+                        <div className="mb-4">
+                            {/* <div className={`p-4 rounded-t-lg border bg-white`}>
+                                <div className="flex items-center gap-2 text-sm text-gray-700">
+                                    Permissions
+                                </div>
+                            </div> */}
+                            <div className="grid grid-cols-2 gap-4">
+                                {Object.entries(permissions).map(
+                                    ([group, permissionItems], i) => (
+                                        <div
+                                            key={i}
+                                            className="p-4 bg-white rounded-lg shadow-md"
+                                        >
+                                            <h3 className="font-bold text-lg mb-2">
+                                                {group}
+                                            </h3>
+                                            <div className="flex flex-wrap gap-2">
+                                                {permissionItems.map(
+                                                    (permission) => (
+                                                        <Checkbox
+                                                            label={permission}
+                                                            value={permission}
+                                                            onChange={
+                                                                handleSelectedPermissions
+                                                            }
+                                                            key={permission}
+                                                        />
+                                                    )
+                                                )}
+                                            </div>
+                                            {errors?.selectedPermissions && (
+                                                <div className="text-xs text-red-500 mt-4">
+                                                    {errors.selectedPermissions}
+                                                </div>
+                                            )}
+                                        </div>
+                                    )
+                                )}
+                            </div>
+                        </div>
+                        <div className="flex items-center gap-2">
+                            <Button type={"submit"}  />
+                            <Button
+                                type={"cancel"}
+                                url={route("roles.index")}
+                            />
+                        </div>
+                    </form>
+                </Card>
+            </Container>
+        </AuthenticatedLayout>
+    );
+}
+```
+
+
+Pada kode diatas, pertama - tama kita import beberapa file yang kita butuhkan
+
+```
+import React from "react";
+import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
+import Container from "@/Components/Container";
+import { Head, useForm, usePage } from "@inertiajs/react";
+import Input from "@/Components/Input";
+import Button from "@/Components/Button";
+import Card from "@/Components/Card";
+import Checkbox from "@/Components/Checkbox";
+import Swal from "sweetalert2";
+```
+Kemudian kita membuat sebuah state menggunakan form helper dari inertia.
+
+```
+const { data, setData, post, errors } = useForm({
+        name: "",
+        selectedPermissions: [],
+    });
+```
+
+Selanjutnya kita membuat sebuah method baru dengan nama handleSelectedPermissions yang kita gunakan untuk menangkap sebuah value dari sebuah component checkbox.
+
+```
+const handleSelectedPermissions = (e) => {
+        let items = data.selectedPermissions;
+
+        items.push(e.target.value);
+
+        setData("selectedPermissions", items);
+    };
+```
+
+Selanjutnya kita membuat sebuah method baru dengan nama <code>handleStoreData</code> yang kita gunakan untuk mengirimkan data kita ke server menggunakan form helper yang telah disediakan oleh inertia.
+
+```
+const handleStoreData = async (e) => {
+        e.preventDefault();
+
+        post(route("roles.store"), {
+            onSuccess: () => {
+                Swal.fire({
+                    title: "Success!",
+                    text: "Data created successfully!",
+                    icon: "success",
+                    showConfirmButton: false,
+                    timer: 1500,
+                });
+            },
+        });
+    };
+```
+
+Jika kita perhatikan, pada method post kita arahkan ke sebuah route yang bernama <code>roles.store</code> dan ketika data berhasil dikirimkan, kita memanggil sebuah <code>sweet alert</code>.
+
+```
+post(route('permissions.store'), {
+    onSuccess: () => {
+        Swal.fire({
+            title: 'Success!',
+            text: 'Data created successfully!',
+            icon: 'success',
+            showConfirmButton: false,
+            timer: 1500
+        })
+    }
+});
+```
+
+### Langkah 6 - Membuat edit Roles
+
+Silahkan teman - teman  buat file baru dengan nama <code>Edit.jsx</code> yang akan kita letakan di <code>resources/js/Pages/Roles</code>, kemudian ubah kodenya menjadi seperti berikut ini.
+
+```
+import React from "react";
+import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
+import Container from "@/Components/Container";
+import { Head, useForm, usePage } from "@inertiajs/react";
+import Input from "@/Components/Input";
+import Button from "@/Components/Button";
+import Card from "@/Components/Card";
+import Checkbox from "@/Components/Checkbox";
+import Swal from "sweetalert2";
+export default function Edit({ auth }) {
+    // destruct permissions from usepage props
+    const { permissions, role } = usePage().props;
+
+    // define state with helper inertia
+    const { data, setData, post, errors } = useForm({
+        name: role.name,
+        selectedPermissions: role.permissions.map(
+            (permission) => permission.name
+        ),
+        _method: "put",
+    });
+
+    // define method handleSelectedPermissions
+    const handleSelectedPermissions = (e) => {
+        let items = data.selectedPermissions;
+
+        if (items.includes(e.target.value))
+            items.splice(items.indexOf(e.target.value), 1);
+        else items.push(e.target.value);
+        setData("selectedPermissions", items);
+    };
+
+    // define method handleUpdateData
+    const handleUpdatedata = async (e) => {
+        e.preventDefault();
+
+        post(route("roles.update", role.id), {
+            onSuccess: () => {
+                Swal.fire({
+                    title: "Success!",
+                    text: "Data created successfully!",
+                    icon: "success",
+                    showConfirmButton: false,
+                    timer: 1500,
+                });
+            },
+        });
+    };
+    return (
+        <AuthenticatedLayout
+            user={auth.user}
+            header={
+                <h2 className="font-semibold text-xl text-gray-800 leading-tight">
+                    Edit Role
+                </h2>
+            }
+        >
+            <Head title={"Edit Roles"} />
+            <Container>
+                <Card title={"Edit role"}>
+                    <form onSubmit={handleUpdatedata}>
+                        <div className="mb-4">
+                            <Input
+                                label={"Role Name"}
+                                type={"text"}
+                                value={data.name}
+                                onChange={(e) =>
+                                    setData("name", e.target.value)
+                                }
+                                errors={errors.name}
+                                placeholder="Input role name.."
+                            />
+                        </div>
+                        <div className="mb-4">
+                            <div className="grid grid-cols-2 gap-4">
+                                {Object.entries(permissions).map(
+                                    ([group, permissionItems], i) => (
+                                        <div
+                                            key={i}
+                                            className="p-4 bg-white rounded-lg shadow-md"
+                                        >
+                                            <h3 className="font-bold text-lg mb-2">
+                                                {group}
+                                            </h3>
+                                            <div className="flex flex-wrap gap-2">
+                                                {permissionItems.map(
+                                                    (permission) => (
+                                                        <Checkbox
+                                                            label={permission}
+                                                            value={permission}
+                                                            onChange={
+                                                                handleSelectedPermissions
+                                                            }
+                                                            defaultChecked={data.selectedPermissions.includes(
+                                                                permission
+                                                            )}
+                                                            key={permission}
+                                                        />
+                                                    )
+                                                )}
+                                            </div>
+                                            {errors?.selectedPermissions && (
+                                                <div className="text-xs text-red-500 mt-4">
+                                                    {errors.selectedPermissions}
+                                                </div>
+                                            )}
+                                        </div>
+                                    )
+                                )}
+                            </div>
+                        </div>
+
+                        <div className="flex items-center gap-2">
+                            <Button type={"submit"}  />
+                            <Button
+                                type={"cancel"}
+                                url={route("roles.index")}
+                            />
+                        </div>
+                    </form>
+                </Card>
+            </Container>
+        </AuthenticatedLayout>
+    );
+}
+```
+
+Pada kode diatas, pertama - tama kita import beberapa file yang kita butuhkan.
+
+```
+import React from "react";
+import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
+import Container from "@/Components/Container";
+import { Head, useForm, usePage } from "@inertiajs/react";
+import Input from "@/Components/Input";
+import Button from "@/Components/Button";
+import Card from "@/Components/Card";
+import Checkbox from "@/Components/Checkbox";
+import Swal from "sweetalert2";
+```
+
+Kemudian kita membuat sebuah state menggunakan form helper dari inertia.
+
+```
+const { data, setData, post, errors } = useForm({
+        name: role.name,
+        selectedPermissions: role.permissions.map(
+            (permission) => permission.name
+        ),
+        _method: "put",
+    });
+```
+
+Selanjutnya kita membuat sebuah method baru dengan nama handleSelectedPermissions yang kita gunakan untuk menangkap sebuah value dari sebuah component checkbox.
+
+```
+const handleSelectedPermissions = (e) => {
+        let items = data.selectedPermissions;
+
+        if (items.includes(e.target.value))
+            items.splice(items.indexOf(e.target.value), 1);
+        else items.push(e.target.value);
+        setData("selectedPermissions", items);
+    };
+```
+
+Selanjutnya kita membuat sebuah method baru dengan nama <code>handleUpdateData</code> yang kita gunakan untuk mengirimkan data kita ke server menggunakan form helper yang telah disediakan oleh inertia.
+
+```
+ const handleUpdatedata = async (e) => {
+        e.preventDefault();
+
+        post(route("roles.update", role.id), {
+            onSuccess: () => {
+                Swal.fire({
+                    title: "Success!",
+                    text: "Data created successfully!",
+                    icon: "success",
+                    showConfirmButton: false,
+                    timer: 1500,
+                });
+            },
+        });
+    };
+```
+
+Sumber : [membuat-module-role-dengan-inertia-react](https://jurnalkoding.com/series/tutorial-laravel-inertia-roles-permissions/tutorial-inertia-roles-permissions-13-membuat-module-role-dengan-inertia-react) 
+
+### kesimpulan
+
+<p>Pada artikel ini, kita telah belajar membuat <strong>CRUD (Create,Read,Update,Delete) </strong>  <strong>Roles</strong>.</p>
+
+<p>Jika teman-teman ada kendala saat belajar, silahkan bisa bertanya melalui kolom komentar atau <em>group</em> <strong>Telegram</strong> <strong>SantriKoding</strong>.</p>
+
+Semoga bermanfaat! 😊
+
+
