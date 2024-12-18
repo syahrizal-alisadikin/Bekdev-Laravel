@@ -670,6 +670,10 @@ Selanjutnya kita memanggil sebuah utils <code>hasAnyPermissions</code> yang tela
 }
 ```
 
+![](https://i.imgur.com/EadT3De.png)
+
+![](https://i.imgur.com/qGgziYw.png)
+
 ### Langkah 6 - Membuat create User
 
 Silahkan teman - teman  buat file baru dengan nama <code>Create.jsx</code> yang akan kita letakan di <code>resources/js/Pages/Users</code>, kemudian ubah kodenya menjadi seperti berikut ini.
@@ -864,6 +868,8 @@ post(route('permissions.store'), {
 });
 ```
 
+![](https://i.imgur.com/SOkmgYU.png)
+
 ### Langkah 7 - Membuat edit User
 
 Silahkan teman - teman  buat file baru dengan nama <code>Edit.jsx</code> yang akan kita letakan di <code>resources/js/Pages/Users</code>, kemudian ubah kodenya menjadi seperti berikut ini.
@@ -1011,6 +1017,7 @@ Selanjutnya kita membuat sebuah method baru dengan nama <code>handleUpdateData</
         });
     }
 ```
+![](https://i.imgur.com/CM8L7Lq.png)
 
 ### kesimpulan
 
