@@ -1,4 +1,4 @@
-<p>Sekarang kita akan belajar bagaimana cara melakukan installasi dan konfigurasi <strong>Laravel Spatie Permission</strong> di dalam aplikasi yang sedang kita kembangkan.</p>
+Sekarang kita akan belajar bagaimana cara melakukan installasi dan konfigurasi <strong>Laravel Spatie Permission</strong> di dalam aplikasi yang sedang kita kembangkan
 
 ### Langkah 1 - Install Laravel Spatie Permission
 
