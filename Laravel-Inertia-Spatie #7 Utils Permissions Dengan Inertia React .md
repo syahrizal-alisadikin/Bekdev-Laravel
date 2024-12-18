@@ -15,9 +15,6 @@ export default function hasAnyPermission(permissions){
     // get all permissions from props auth
     let allPermissions = auth.permissions;
 
-    // get super-admin role from props auth
-    let superAdmin = auth.super;
-
     // define has permission is false
     let hasPermission = false;
 
