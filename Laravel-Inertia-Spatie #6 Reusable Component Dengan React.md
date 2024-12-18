@@ -24,7 +24,7 @@ Pada perintah diatas kita melakukan installasi `3` buah package diantaranya seba
 
 ### Langkah 2 - Component Input
 Kita lanjutkan untuk menambahkan <em>Component</em> <code>Input</code>.
-Silahkan Buat file baru  dengan nama <code>Input.jsx</code> dan silahkan masukan kode berikut :
+Silahkan Buat file baru  dengan nama <code>Input.jsx</code> di dalam folder <code>view/resources/js/Components/</code> dan silahkan masukan kode berikut :
 
 ```
 import React from 'react'
@@ -84,7 +84,7 @@ Di atas kita menambahkan <em>props</em>  <strong> label</strong>.
 
 ### Langkah 4 - Component Container
 Kita lanjutkan untuk menambahkan <em>Component</em> <code>Container</code>.
-Silahkan Buat file baru  dengan nama <code>Container.jsx</code> dan silahkan masukan kode berikut :
+Silahkan Buat file baru  dengan nama <code>Container.jsx</code> di dalam folder <code>view/resources/js/Components/</code> dan silahkan masukan kode berikut :
 
 ```
 export default function Container({children}) {
@@ -103,7 +103,7 @@ pada kode diatas kita membuat sebuah <strong>React Functional Component</strong>
 ### Langkah 5 - Component Textarea
 
 Kita lanjutkan untuk menambahkan <em>Component</em> <code>Textarea</code>.
-Silahkan Buat file baru  dengan nama <code>Textarea.jsx</code> dan silahkan masukan kode berikut :
+Silahkan Buat file baru  dengan nama <code>Textarea.jsx</code> di dalam folder <code>view/resources/js/Components/</code> dan silahkan masukan kode berikut :
 
 ```
 export default function Textarea({label, className, errors,...props}) {
@@ -129,7 +129,7 @@ pada kode diatas kita membuat sebuah <strong>React Functional Component</strong>
 ### Langkah 6 - Component Search
 
 Kita lanjutkan untuk menambahkan <em>Component</em> <code>Search</code>.
-Silahkan Buat file baru  dengan nama <code>Search.jsx</code> dan silahkan masukan kode berikut :
+Silahkan Buat file baru  dengan nama <code>Search.jsx</code> di dalam folder <code>view/resources/js/Components/</code> dan silahkan masukan kode berikut :
 
 ```
 import { useForm } from '@inertiajs/react';
@@ -201,7 +201,7 @@ const handleSearchData = (e) => {
 
 ### Langkah 7 - Component Card 
 Kita lanjutkan untuk menambahkan <em>Component</em> <code>Card</code>.
-Silahkan Buat file baru  dengan nama <code>Card.jsx</code> dan silahkan masukan kode berikut :
+Silahkan Buat file baru  dengan nama <code>Card.jsx</code> di dalam folder <code>view/resources/js/Components/</code> dan silahkan masukan kode berikut :
 
 ```
 import React from 'react'
@@ -225,7 +225,7 @@ export default function Card({ title, children, className }) {
 ### Langkah 8 - Component Table 
 
 Kita lanjutkan untuk menambahkan <em>Component</em> <code>Table</code>.
-Silahkan Buat file baru  dengan nama <code>Table.jsx</code> dan silahkan masukan kode berikut :
+Silahkan Buat file baru  dengan nama <code>Table.jsx</code> di dalam folder <code>view/resources/js/Components/</code> dan silahkan masukan kode berikut :
 
 ```
 import React from 'react'
@@ -321,7 +321,7 @@ export default Table;
 ### Langkah 9 - Component Pagination
 
 Kita lanjutkan untuk menambahkan <em>Component</em> <code>Pagination</code>.
-Silahkan Buat file baru  dengan nama <code>Pagination.jsx</code> dan silahkan masukan kode berikut :
+Silahkan Buat file baru  dengan nama <code>Pagination.jsx</code> di dalam folder <code>view/resources/js/Components/</code> dan silahkan masukan kode berikut :
 
 ```
 import React from 'react'
@@ -374,7 +374,7 @@ export default function Pagination({ links })
 ### Langkah 10 - Component Button
 
 Kita lanjutkan untuk menambahkan <em>Component</em> <code>Button</code>.
-Silahkan Buat file baru  dengan nama <code>Button.jsx</code> dan silahkan masukan kode berikut :
+Silahkan Buat file baru  dengan nama <code>Button.jsx</code> di dalam folder <code>view/resources/js/Components/</code> dan silahkan masukan kode berikut :
 
 ```
 import { Link, useForm } from '@inertiajs/react'
