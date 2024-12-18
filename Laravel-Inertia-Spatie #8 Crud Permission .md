@@ -483,6 +483,8 @@ Selanjutnya kita memanggil sebuah utils <code>hasAnyPermissions</code> yang tela
 }
 ```
 
+![](https://i.imgur.com/xZLYQbk.png)
+
 ### Langkah 5 - Membuat create Permission
 
 Silahkan teman - teman  buat file baru dengan nama <code>Create.jsx</code> yang akan kita letakan di <code>resources/js/Pages/Permissions</code>, kemudian ubah kodenya menjadi seperti berikut ini.
