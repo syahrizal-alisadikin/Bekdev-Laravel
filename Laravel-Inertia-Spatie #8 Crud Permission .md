@@ -469,7 +469,7 @@ import Search from '@/Components/Search';
 import hasAnyPermission from '@/Utils/Permissions';
 ```
 
-Selanjutnya kita membuat sebuah React Function Component dengan props auth dan filters.
+Selanjutnya kita membuat sebuah React Function Component dengan props auth.
 
 ```
 export default function Index({auth})
