@@ -613,6 +613,10 @@ Selanjutnya kita memanggil sebuah utils <code>hasAnyPermissions</code> yang tela
 }
 ```
 
+![](https://i.imgur.com/kBXzqoe.png)
+
+![](https://i.imgur.com/qJ4tMa1.png)
+
 ### Langkah 5 - Membuat create Roles
 
 Silahkan teman - teman  buat file baru dengan nama <code>Create.jsx</code> yang akan kita letakan di <code>resources/js/Pages/Roles</code>, kemudian ubah kodenya menjadi seperti berikut ini.
@@ -814,6 +818,8 @@ post(route('permissions.store'), {
 });
 ```
 
+![](https://i.imgur.com/CeLJU0h.png)
+
 ### Langkah 6 - Membuat edit Roles
 
 Silahkan teman - teman  buat file baru dengan nama <code>Edit.jsx</code> yang akan kita letakan di <code>resources/js/Pages/Roles</code>, kemudian ubah kodenya menjadi seperti berikut ini.
@@ -1004,6 +1010,8 @@ Selanjutnya kita membuat sebuah method baru dengan nama <code>handleUpdateData</
         });
     };
 ```
+
+![](https://i.imgur.com/2UbyZpd.png)
 
 Sumber : [membuat-module-role-dengan-inertia-react](https://jurnalkoding.com/series/tutorial-laravel-inertia-roles-permissions/tutorial-inertia-roles-permissions-13-membuat-module-role-dengan-inertia-react) 
 
